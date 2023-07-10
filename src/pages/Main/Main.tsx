@@ -1,4 +1,4 @@
-import Card from '../../components/card/card.tsx';
+import Card from '../../components/Cards/Cards.tsx';
 
 type MainPageProps = {
   cardsCount: number;

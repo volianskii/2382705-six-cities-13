@@ -1,4 +1,4 @@
-import MainPage from '../../pages/main-page/main-page.jsx';
+import MainPage from '../../pages/Main/Main.jsx';
 
 type AppProps = {
   cardsCount: number;
