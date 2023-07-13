@@ -9,7 +9,7 @@ function PrivateRoute (props: PrivateRouteProps): JSX.Element {
   const {isAuth, children} = props;
 
   return (
-    isAuth === true ? children : <Navigate to = '/login' />
+    isAuth ? children : <Navigate to = '/login' />
   );
 }
 
