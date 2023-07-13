@@ -19,7 +19,7 @@ function App({cardsCount}: AppProps): JSX.Element {
         <Route
           path='/favorites'
           element={
-            <PrivateRoute authorizationStatus='NO_AUTH'>
+            <PrivateRoute isAuth={false}>
               <Favorites />
             </PrivateRoute>
           }
