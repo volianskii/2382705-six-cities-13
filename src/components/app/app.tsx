@@ -8,19 +8,45 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 type AppProps = {
   cardsCount: number;
+  offers: {
+    price: number;
+    name: string;
+    id: string;
+    rating: number;
+    type: 'apartment'|'house'|'hotel'|'hostel';
+    capacity: number;
+    bedrooms: number;
+    amenities: string[];
+    premium: boolean;
+    host: {
+      name: string;
+      photo: string;
+      description: string;
+    };
+    reviews: {
+      name: string;
+      photo: string;
+      rating: number;
+      review: string;
+      date: {
+        month: 'June'|'July'|'August';
+        year: number;
+      };
+    }[];
+  }[];
 };
 
-function App({cardsCount}: AppProps): JSX.Element {
+function App({cardsCount, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainPage cardsCount={cardsCount} />} />
+        <Route path='/' element={<MainPage cardsCount={cardsCount} offers={offers}/>} />
         <Route path='/login' element={<Login />} />
         <Route
           path='/favorites'
           element={
-            <PrivateRoute isAuth={false}>
-              <Favorites />
+            <PrivateRoute isAuth>
+              <Favorites offers={offers}/>
             </PrivateRoute>
           }
         />
