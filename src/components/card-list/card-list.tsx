@@ -1,43 +1,17 @@
 import Card from '../card/card';
-import {MouseEvent, useState} from 'react';
+import {useState} from 'react';
+import {OfferType} from '../../mocks/offers.ts';
 
 type CardListProps = {
-  offers: {
-    price: number;
-    name: string;
-    id: string;
-    rating: number;
-    type: 'apartment'|'house'|'hotel'|'hostel';
-    capacity: number;
-    bedrooms: number;
-    amenities: string[];
-    premium: boolean;
-    host: {
-      name: string;
-      photo: string;
-      description: string;
-    };
-    reviews: {
-      name: string;
-      photo: string;
-      rating: number;
-      review: string;
-      date: {
-        month: 'June'|'July'|'August';
-        year: number;
-      };
-    }[];
-  }[];
+  offers: OfferType[];
 };
 
 function CardList({offers}: CardListProps) {
-  const [activeCard, setActiveCard] = useState('first');
+  const [, setActiveCard] = useState('first');
 
-  const mouseEnterHandler = (event: MouseEvent) => {
-    //relatedTarget?
-    //адекватно работает только при наведении на нижние карточки СНИЗУ
-    setActiveCard(event.relatedTarget.getAttribute('keyvalue'));
-    console.log(activeCard);
+  const mouseHandler = (hoverCardId: string): undefined => {
+    setActiveCard(hoverCardId);
+    /* console.log(activeCard); */
   };
 
   return (
@@ -45,7 +19,7 @@ function CardList({offers}: CardListProps) {
       {offers.map((offer, id) => {
         const keyValue = `${id}-${offer.id}`;
         return (
-          <Card offer={offer} keyvalue={keyValue} key={keyValue} onMouseEnter={mouseEnterHandler}/>
+          <Card offer={offer} key={keyValue} onMouseEnter={mouseHandler}/>
         );
       })}
     </div>

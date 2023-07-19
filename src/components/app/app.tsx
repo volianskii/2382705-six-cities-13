@@ -5,35 +5,11 @@ import Offer from '../../pages/offer/offer.tsx';
 import Page404 from '../../pages/page404/page404.tsx';
 import PrivateRoute from '../../components/private-route/private-route.tsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {OfferType} from '../../mocks/offers.ts';
 
 type AppProps = {
   cardsCount: number;
-  offers: {
-    price: number;
-    name: string;
-    id: string;
-    rating: number;
-    type: 'apartment'|'house'|'hotel'|'hostel';
-    capacity: number;
-    bedrooms: number;
-    amenities: string[];
-    premium: boolean;
-    host: {
-      name: string;
-      photo: string;
-      description: string;
-    };
-    reviews: {
-      name: string;
-      photo: string;
-      rating: number;
-      review: string;
-      date: {
-        month: 'June'|'July'|'August';
-        year: number;
-      };
-    }[];
-  }[];
+  offers: OfferType[];
 };
 
 function App({cardsCount, offers}: AppProps): JSX.Element {
@@ -50,7 +26,7 @@ function App({cardsCount, offers}: AppProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path='/offer/:id' element={<Offer />} />
+        <Route path='/offer/:id' element={<Offer offers={offers}/>} />
         <Route path='*' element={<Page404 />} />
       </Routes>
     </BrowserRouter>

@@ -1,15 +1,16 @@
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
 
 function CommentForm(): JSX.Element {
-  const [comment, setComment] = useState('first comment');
+  const [, setComment] = useState('first comment');
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    console.log(comment);
+    /* console.log(comment); */
   };
 
-  const changeHandler = (event) => {
-    setComment(event.target.value);
+  const changeHandler = (event: FormEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setComment(target.value);
   };
 
   return (

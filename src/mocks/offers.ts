@@ -1,4 +1,4 @@
-type offer = {
+export type OfferType = {
   price: number;
   name: string;
   id: string;
@@ -12,6 +12,7 @@ type offer = {
     name: string;
     photo: string;
     description: string;
+    proStatus: boolean;
   };
   reviews: {
     name: string;
@@ -25,7 +26,7 @@ type offer = {
   }[];
 }
 
-const offers: offer[] = [
+const offers: OfferType[] = [
   {
     price: 120,
     name: 'Beautiful & luxurious studio at great location',
@@ -40,16 +41,27 @@ const offers: offer[] = [
       name: 'Alice',
       photo: 'SOME DIR',
       description: 'A QUIET COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY. AN INDEPENDENT HOUSE, STRATEGICALLY LOCATED BETWEEN REMBRAND SQUARE AND NATIONAL OPERA, BUT WHERE THE BUSTLE OF THE CITY COMES TO REST IN THIS ALLEY FLOWERY AND COLORFUL.',
+      proStatus: true
     },
     reviews: [
       {
         name: 'Alan',
         photo: 'SOME DIR',
         rating: 3,
-        review: 'A QUIET COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY.',
+        review: 'A COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY.',
         date: {
           month: 'June',
           year: 2019,
+        },
+      },
+      {
+        name: 'Alex',
+        photo: 'SOME DIR',
+        rating: 6,
+        review: 'dfdfkjgjkjkgdjklghjklkjlghkjlfjklklhkl',
+        date: {
+          month: 'July',
+          year: 2014,
         },
       }
     ],
@@ -68,6 +80,7 @@ const offers: offer[] = [
       name: 'Tom',
       photo: 'SOME DIR',
       description: 'gdfgfjdksjlf;khsfkh;dklh;klapfdklakhlkfk43opk5op343i6jh4364h56kh346k43hj5k76h45kl7h54klh754klh7kl45hk',
+      proStatus: false
     },
     reviews: [
       {
@@ -96,6 +109,7 @@ const offers: offer[] = [
       name: 'Tim',
       photo: 'SOME DIR',
       description: 'JHJGFJFJFLDFJLHDL;HDFJ9438903486983KLDGMDKLFGLKDJ',
+      proStatus: true
     },
     reviews: [
       {
@@ -124,6 +138,7 @@ const offers: offer[] = [
       name: 'Bob',
       photo: 'SOME DIR',
       description: 'lhlhlhlhlhllhlhlhllhlglf;flhkf899456094hflklf;khfk;l',
+      proStatus: false
     },
     reviews: [
       {

@@ -1,31 +1,8 @@
 import Logo from '../../components/logo/logo.tsx';
+import {OfferType} from '../../mocks/offers.ts';
+
 type FavoritesProps = {
-  offers: {
-    price: number;
-    name: string;
-    id: string;
-    rating: number;
-    type: 'apartment'|'house'|'hotel'|'hostel';
-    capacity: number;
-    bedrooms: number;
-    amenities: string[];
-    premium: boolean;
-    host: {
-      name: string;
-      photo: string;
-      description: string;
-    };
-    reviews: {
-      name: string;
-      photo: string;
-      rating: number;
-      review: string;
-      date: {
-        month: 'June'|'July'|'August';
-        year: number;
-      };
-    }[];
-  }[];
+  offers: OfferType[];
 }
 
 
