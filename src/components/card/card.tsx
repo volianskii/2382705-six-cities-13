@@ -4,21 +4,20 @@ import {OfferType} from '../../mocks/offers.ts';
 type CardProps = {
   offer: OfferType;
   key: string;
-  onMouseEnter: (idd: string) => undefined;
+  onMouseEnter: (hoverCardId: string) => void;
 };
 
 function Card({offer, key, onMouseEnter}: CardProps): JSX.Element {
   return (
     <article className="cities__card place-card" key={key} onMouseEnter={() => onMouseEnter(offer.id)}>
-      {offer.premium ?
+      {offer.premium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div> :
-        null}
+        </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href='#'>
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

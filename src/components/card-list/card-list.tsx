@@ -6,22 +6,16 @@ type CardListProps = {
   offers: OfferType[];
 };
 
-function CardList({offers}: CardListProps) {
+function CardList({ offers }: CardListProps) {
   const [, setActiveCard] = useState('first');
 
-  const mouseHandler = (hoverCardId: string): undefined => {
+  const mouseHandler = (hoverCardId: string): void => {
     setActiveCard(hoverCardId);
-    /* console.log(activeCard); */
   };
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, id) => {
-        const keyValue = `${id}-${offer.id}`;
-        return (
-          <Card offer={offer} key={keyValue} onMouseEnter={mouseHandler}/>
-        );
-      })}
+      {offers.map((offer) => <Card offer={offer} key={offer.id} onMouseEnter={mouseHandler} />)}
     </div>
   );
 }

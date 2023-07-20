@@ -1,17 +1,18 @@
 import Logo from '../../components/logo/logo.tsx';
 import CommentForm from '../../components/comment-form/comment-form.tsx';
 import {useParams} from 'react-router-dom';
+import {useState, useEffect} from 'react';
 import {OfferType} from '../../mocks/offers.ts';
 
 type OfferProps = {
   offers: OfferType[];
 };
 
-type CurrentOfferType = OfferType;
+/* type CurrentOfferType = OfferType; */
 
 function Offer({offers}: OfferProps): JSX.Element {
   const {id} = useParams();
-  let currentOffer: CurrentOfferType = {
+  /* const current: CurrentOfferType = {
     price: 120,
     name: 'Beautiful & luxurious studio at great location',
     id: 'dzgds456',
@@ -39,15 +40,17 @@ function Offer({offers}: OfferProps): JSX.Element {
         },
       }
     ],
-  };
+  }; */
 
-  offers.map((offer) => {
-    if(offer.id === id) {
-      currentOffer = offer;
-    }
-    return currentOffer;
-  }
-  );
+  const [currentOffer, setCurrentOffer] = useState(offers[0]);
+
+  useEffect(() => {
+    offers.map((offer) => {
+      if(offer.id === id) {
+        setCurrentOffer(offer);
+      }
+    });
+  });
 
   return (
     <div className="page">
@@ -163,11 +166,10 @@ function Offer({offers}: OfferProps): JSX.Element {
                   <span className="offer__user-name">
                     {currentOffer.host.name}
                   </span>
-                  {currentOffer.host.proStatus ?
+                  {currentOffer.host.proStatus &&
                     <span className="offer__user-status">
                       Pro
-                    </span> :
-                    null}
+                    </span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">

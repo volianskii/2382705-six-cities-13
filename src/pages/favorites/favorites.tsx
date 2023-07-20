@@ -49,14 +49,13 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
                 </div>
                 <div className="favorites__places">
 
-                  {offers.map((offer, id) => {
-                    const keyValue = `${id}-${offer.id}`;
-                    return (
-                      <article className="favorites__card place-card" key={keyValue}>
-                        {offer.premium ?
+                  {offers.map((offer) =>
+                    (
+                      <article className="favorites__card place-card" key={offer.id}>
+                        {offer.premium &&
                           <div className="place-card__mark">
                             <span>Premium</span>
-                          </div> : null}
+                          </div>}
                         <div className="favorites__image-wrapper place-card__image-wrapper">
                           <a href="#">
                             <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="Place image" />
@@ -87,9 +86,8 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
                           <p className="place-card__type">{offer.type}</p>
                         </div>
                       </article>
-                    );
-                  })}
-
+                    )
+                  )}
                 </div>
               </li>
 

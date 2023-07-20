@@ -1,28 +1,54 @@
+enum Months {
+  June = 'June',
+  July = 'July',
+  August = 'August',
+  September = 'September',
+  October = 'October',
+  November = 'November',
+  December = 'December',
+  January = 'January',
+  February = 'February',
+  March = 'March',
+  April = 'April',
+  May = 'May',
+}
+
+enum ApartmentType {
+  Apartment = 'apartment',
+  House = 'house',
+  Hotel = 'hotel',
+  Hostel = 'hostel',
+}
+
+type Date = {
+  month: Months;
+  year: number;
+}
+
+type Host = {
+  name: string;
+  photo: string;
+  description: string;
+  proStatus: boolean;
+}
+
 export type OfferType = {
   price: number;
   name: string;
   id: string;
   rating: number;
-  type: 'apartment'|'house'|'hotel'|'hostel';
+  type: ApartmentType;
   capacity: number;
   bedrooms: number;
   amenities: string[];
   premium: boolean;
-  host: {
-    name: string;
-    photo: string;
-    description: string;
-    proStatus: boolean;
-  };
+  host: Host;
   reviews: {
     name: string;
     photo: string;
     rating: number;
     review: string;
-    date: {
-      month: 'June'|'July'|'August';
-      year: number;
-    };
+    date: Date;
   }[];
 }
 
@@ -32,7 +58,7 @@ const offers: OfferType[] = [
     name: 'Beautiful & luxurious studio at great location',
     id: 'dzgds456',
     rating: 4,
-    type: 'apartment',
+    type: ApartmentType.Apartment,
     capacity: 4,
     bedrooms: 3,
     amenities: ['heating','kitchen','fridge'],
@@ -50,7 +76,7 @@ const offers: OfferType[] = [
         rating: 3,
         review: 'A COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY.',
         date: {
-          month: 'June',
+          month: Months.June,
           year: 2019,
         },
       },
@@ -60,7 +86,7 @@ const offers: OfferType[] = [
         rating: 6,
         review: 'dfdfkjgjkjkgdjklghjklkjlghkjlfjklklhkl',
         date: {
-          month: 'July',
+          month: Months.July,
           year: 2014,
         },
       }
@@ -71,7 +97,7 @@ const offers: OfferType[] = [
     name: 'Cool house near the park',
     id: 'reerter234',
     rating: 3,
-    type: 'house',
+    type: ApartmentType.House,
     capacity: 6,
     bedrooms: 4,
     amenities: ['heating','kitchen','fridge','air conditioning','parking'],
@@ -89,7 +115,7 @@ const offers: OfferType[] = [
         rating: 4,
         review: 'gdfgfjdksjlf;khsfkh;dklh;klapfdklakhlkfk43opk5op343i6jh4364h56kh346k43hj5k76h45kl7h54klh754klh7kl45hk',
         date: {
-          month: 'July',
+          month: Months.November,
           year: 2020,
         },
       }
@@ -100,7 +126,7 @@ const offers: OfferType[] = [
     name: 'Awesome hostel in the centre',
     id: 'kbmbmfgn32234',
     rating: 5,
-    type: 'hostel',
+    type: ApartmentType.Hostel,
     capacity: 10,
     bedrooms: 2,
     amenities: ['heating','kitchen'],
@@ -118,7 +144,7 @@ const offers: OfferType[] = [
         rating: 4.5,
         review: 'JHJGFJFJFLDFJLHDL;HDFJ9438903486983KLDGMDKLFGLKDJ',
         date: {
-          month: 'August',
+          month: Months.January,
           year: 2022,
         },
       }
@@ -129,7 +155,7 @@ const offers: OfferType[] = [
     name: 'Beautiful hotel in the countryside',
     id: 'eqweuweir231',
     rating: 4.9,
-    type: 'hotel',
+    type: ApartmentType.Hotel,
     capacity: 25,
     bedrooms: 7,
     amenities: ['heating','kitchen','air conditioning','parking', 'restaurant'],
@@ -147,7 +173,7 @@ const offers: OfferType[] = [
         rating: 3.8,
         review: 'lhlhlhlhlhllhlhlhllhlglf;flhkf899456094hflklf;khfk;l',
         date: {
-          month: 'June',
+          month: Months.March,
           year: 2017,
         },
       }
