@@ -1,11 +1,13 @@
-import Card from '../../components/card/card.tsx';
 import Logo from '../../components/logo/logo.tsx';
+import CardList from '../../components/card-list/card-list.tsx';
+import {OfferType} from '../../mocks/offers.ts';
 
 type MainPageProps = {
   cardsCount: number;
-}
+  offers: OfferType[];
+};
 
-function MainPage({cardsCount}: MainPageProps): JSX.Element {
+function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -91,13 +93,7 @@ function MainPage({cardsCount}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-              </div>
+              <CardList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

@@ -5,26 +5,28 @@ import Offer from '../../pages/offer/offer.tsx';
 import Page404 from '../../pages/page404/page404.tsx';
 import PrivateRoute from '../../components/private-route/private-route.tsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {OfferType} from '../../mocks/offers.ts';
 
 type AppProps = {
   cardsCount: number;
+  offers: OfferType[];
 };
 
-function App({cardsCount}: AppProps): JSX.Element {
+function App({cardsCount, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainPage cardsCount={cardsCount} />} />
+        <Route path='/' element={<MainPage cardsCount={cardsCount} offers={offers}/>} />
         <Route path='/login' element={<Login />} />
         <Route
           path='/favorites'
           element={
-            <PrivateRoute isAuth={false}>
-              <Favorites />
+            <PrivateRoute isAuth>
+              <Favorites offers={offers}/>
             </PrivateRoute>
           }
         />
-        <Route path='/offer/:id' element={<Offer />} />
+        <Route path='/offer/:id' element={<Offer offers={offers}/>} />
         <Route path='*' element={<Page404 />} />
       </Routes>
     </BrowserRouter>
