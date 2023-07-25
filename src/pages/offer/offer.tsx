@@ -8,40 +8,8 @@ type OfferProps = {
   offers: OfferType[];
 };
 
-/* type CurrentOfferType = OfferType; */
-
 function Offer({offers}: OfferProps): JSX.Element {
   const {id} = useParams();
-  /* const current: CurrentOfferType = {
-    price: 120,
-    name: 'Beautiful & luxurious studio at great location',
-    id: 'dzgds456',
-    rating: 4,
-    type: 'apartment',
-    capacity: 4,
-    bedrooms: 3,
-    amenities: ['heating','kitchen','fridge'],
-    premium: true,
-    host: {
-      name: 'Alice',
-      photo: 'SOME DIR',
-      description: 'A QUIET COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY. AN INDEPENDENT HOUSE, STRATEGICALLY LOCATED BETWEEN REMBRAND SQUARE AND NATIONAL OPERA, BUT WHERE THE BUSTLE OF THE CITY COMES TO REST IN THIS ALLEY FLOWERY AND COLORFUL.',
-      proStatus: true
-    },
-    reviews: [
-      {
-        name: 'Alan',
-        photo: 'SOME DIR',
-        rating: 3,
-        review: 'A QUIET COZY AND PICTURESQUE THAT HIDES BEHIND A A RIVER BY THE UNIQUE LIGHTNESS OF AMSTERDAM. THE BUILDING IS GREEN AND FROM 18TH CENTURY.',
-        date: {
-          month: 'June',
-          year: 2019,
-        },
-      }
-    ],
-  }; */
-
   const [currentOffer, setCurrentOffer] = useState(offers[0]);
 
   useEffect(() => {

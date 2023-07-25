@@ -1,6 +1,8 @@
 import Logo from '../../components/logo/logo.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
 import {OfferType} from '../../mocks/offers.ts';
+import {CITY} from '../../mocks/city.ts';
+import Map from '../../components/map/map.tsx';
 
 type MainPageProps = {
   cardsCount: number;
@@ -96,7 +98,9 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
               <CardList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={CITY} offers={offers} selectedOffer={undefined} />
+              </section>
             </div>
           </div>
         </div>
