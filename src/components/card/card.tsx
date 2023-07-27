@@ -5,16 +5,17 @@ type CardProps = {
   offer: OfferType;
   key: string;
   onMouseEnter: (hoverCardId: string) => void;
+  type: string;
 };
 
-function Card({offer, key, onMouseEnter}: CardProps): JSX.Element {
+function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
   return (
-    <article className="cities__card place-card" key={key} onMouseEnter={() => onMouseEnter(offer.id)}>
+    <article className={`${type}__card place-card`} key={key} onMouseEnter={() => onMouseEnter(offer.id)}>
       {offer.premium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${type}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
         </Link>
