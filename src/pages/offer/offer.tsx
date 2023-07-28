@@ -159,7 +159,11 @@ function Offer({offers}: OfferProps): JSX.Element {
             </div>
           </div>
           <section className="offer__map map">
-            <Map city={CITY} offers={restOffers} selectedOffer={undefined} height={'579px'} width={'50%'} />
+            <div>
+              <div style={{display: 'flex', justifyContent: 'center'}}>
+                <Map city={CITY} offers={restOffers} selectedOffer={undefined} height={'579px'} width={'1144px'} />
+              </div>
+            </div>
           </section>
         </section>
         <div className="container">
