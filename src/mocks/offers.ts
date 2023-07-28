@@ -42,6 +42,8 @@ export type OfferType = {
   bedrooms: number;
   amenities: string[];
   premium: boolean;
+  lat: number;
+  lng: number;
   host: Host;
   reviews: {
     name: string;
@@ -63,6 +65,8 @@ const offers: OfferType[] = [
     bedrooms: 3,
     amenities: ['heating','kitchen','fridge'],
     premium: true,
+    lat: 52.3909553943508,
+    lng: 4.85309666406198,
     host: {
       name: 'Alice',
       photo: 'SOME DIR',
@@ -102,6 +106,8 @@ const offers: OfferType[] = [
     bedrooms: 4,
     amenities: ['heating','kitchen','fridge','air conditioning','parking'],
     premium: false,
+    lat: 52.3609553943508,
+    lng: 4.85309666406198,
     host: {
       name: 'Tom',
       photo: 'SOME DIR',
@@ -131,6 +137,8 @@ const offers: OfferType[] = [
     bedrooms: 2,
     amenities: ['heating','kitchen'],
     premium: true,
+    lat: 52.3909553943508,
+    lng: 4.929309666406198,
     host: {
       name: 'Tim',
       photo: 'SOME DIR',
@@ -160,6 +168,8 @@ const offers: OfferType[] = [
     bedrooms: 7,
     amenities: ['heating','kitchen','air conditioning','parking', 'restaurant'],
     premium: false,
+    lat: 52.3809553943508,
+    lng: 4.939309666406198,
     host: {
       name: 'Bob',
       photo: 'SOME DIR',
