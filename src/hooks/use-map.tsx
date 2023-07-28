@@ -21,7 +21,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
         URL_MAP_LAYER,
         {
           attribution:
-          URL_MAP_ATTRIBUTION
+            URL_MAP_ATTRIBUTION
         }
       );
 
