@@ -98,7 +98,7 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
               <CardList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
+              <section className="map">
                 <Map city={CITY} offers={offers} selectedOffer={undefined} />
               </section>
             </div>
