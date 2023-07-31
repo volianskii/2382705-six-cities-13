@@ -32,6 +32,14 @@ type Host = {
   proStatus: boolean;
 }
 
+export type ReviewType = {
+  name: string;
+  photo: string;
+  rating: number;
+  review: string;
+  date: Date;
+}
+
 export type OfferType = {
   price: number;
   name: string;
@@ -45,13 +53,7 @@ export type OfferType = {
   lat: number;
   lng: number;
   host: Host;
-  reviews: {
-    name: string;
-    photo: string;
-    rating: number;
-    review: string;
-    date: Date;
-  }[];
+  reviews: ReviewType[];
 }
 
 const offers: OfferType[] = [

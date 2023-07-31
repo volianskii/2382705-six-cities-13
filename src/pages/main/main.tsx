@@ -95,11 +95,16 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offers} />
+              <CardList
+                offers={offers}
+                listProp={'cities__places-list'}
+                typeProp={'cities'}
+                tabsProp={'tabs__content'}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="map">
-                <Map city={CITY} offers={offers} selectedOffer={undefined} />
+              <section className="cities__map map">
+                <Map city={CITY} offers={offers} selectedOffer={undefined} height={'814px'} width={undefined} />
               </section>
             </div>
           </div>
