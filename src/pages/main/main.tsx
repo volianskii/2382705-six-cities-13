@@ -1,15 +1,22 @@
 import Logo from '../../components/logo/logo.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
 import {OfferType} from '../../mocks/offers.ts';
-import {CITY} from '../../mocks/city.ts';
+import {CITIES} from '../../mocks/city.ts';
 import Map from '../../components/map/map.tsx';
+import CitiesList from '../../components/cities-list/cities-list.tsx';
+import {useEffect} from 'react';
+import {getOffers} from '../../store/action.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
 
-type MainPageProps = {
-  cardsCount: number;
-  offers: OfferType[];
-};
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
+  useEffect(() => {
+    dispatch(getOffers());
+  });
+  const currentOfferList: OfferType[] = useAppSelector((state) => state.offers);
+  const currentCity: string = useAppSelector((state) => state.city);
+  const currentCityOfferList = currentOfferList.filter((offer) => offer.city === currentCity);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -41,45 +48,14 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cardsCount} places to stay in Amsterdam</b>
+              <b className="places__found">{currentCityOfferList.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -96,7 +72,7 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <CardList
-                offers={offers}
+                offers={currentCityOfferList}
                 listProp={'cities__places-list'}
                 typeProp={'cities'}
                 tabsProp={'tabs__content'}
@@ -104,7 +80,11 @@ function MainPage({cardsCount, offers}: MainPageProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={CITY} offers={offers} selectedOffer={undefined} height={'814px'} width={undefined} />
+                <Map
+                  city={CITIES.filter((city) => city.name === currentCity)[0]}
+                  offers={currentCityOfferList} selectedOffer={undefined} height={'814px'}
+                  width={undefined}
+                />
               </section>
             </div>
           </div>

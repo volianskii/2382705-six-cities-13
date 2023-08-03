@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../constants/marker-url';
 import useMap from '../../hooks/use-map';
-import {City} from '../../mocks/city.ts';
+import type {City} from '../../mocks/city.ts';
 import {OfferType} from '../../mocks/offers';
 import 'leaflet/dist/leaflet.css';
 
@@ -29,6 +29,12 @@ const currentCustomIcon = new Icon({
 function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  useEffect(() => {
+    if (map) {
+      map.setView([city.lat, city.lng], city.zoom);
+    }
+  }, [map, city]);
 
   useEffect(() => {
     if(map) {

@@ -1,6 +1,6 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
-import {City} from '../mocks/city';
+import type {City} from '../mocks/city';
 import {URL_MAP_LAYER, URL_MAP_ATTRIBUTION} from '../constants/map-url.ts';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
@@ -16,7 +16,6 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
         },
         zoom: city.zoom
       });
-
       const layer = new TileLayer(
         URL_MAP_LAYER,
         {

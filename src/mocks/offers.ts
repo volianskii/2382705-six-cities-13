@@ -54,6 +54,7 @@ export type OfferType = {
   lng: number;
   host: Host;
   reviews: ReviewType[];
+  city: string;
 }
 
 const offers: OfferType[] = [
@@ -97,6 +98,7 @@ const offers: OfferType[] = [
         },
       }
     ],
+    city: 'Amsterdam',
   },
   {
     price: 150,
@@ -128,6 +130,7 @@ const offers: OfferType[] = [
         },
       }
     ],
+    city: 'Amsterdam',
   },
   {
     price: 190,
@@ -159,6 +162,7 @@ const offers: OfferType[] = [
         },
       }
     ],
+    city: 'Amsterdam',
   },
   {
     price: 220,
@@ -170,8 +174,8 @@ const offers: OfferType[] = [
     bedrooms: 7,
     amenities: ['heating','kitchen','air conditioning','parking', 'restaurant'],
     premium: false,
-    lat: 52.3809553943508,
-    lng: 4.939309666406198,
+    lat: 50.928341513383906,
+    lng: 6.952407280722526,
     host: {
       name: 'Bob',
       photo: 'SOME DIR',
@@ -190,6 +194,7 @@ const offers: OfferType[] = [
         },
       }
     ],
+    city: 'Cologne',
   }
 ];
 
