@@ -17,7 +17,7 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(getOffers());
-  });
+  }, []);
 
   return (
     <div className="page page--gray page--main">
