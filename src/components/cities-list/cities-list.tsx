@@ -1,13 +1,12 @@
 import {changeCity} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {CITIES} from '../../mocks/city.ts';
-
+import classNames from 'classnames';
 
 function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const clickHandler = (event: React.MouseEvent<HTMLSpanElement>) => {
-    const target = event.target as HTMLSpanElement;
-    dispatch(changeCity(target.innerHTML));
+  const clickHandler = (city: string) => {
+    dispatch(changeCity(city));
   };
   const currentCity = useAppSelector((state) => state.city);
 
@@ -16,9 +15,9 @@ function CitiesList(): JSX.Element {
       {CITIES.map((city, id) => {
         const keyValue = `${id}-city`;
         return (
-          <li key={keyValue} className="locations__item">
-            <a className={`locations__item-link tabs__item ${city.name === currentCity ? 'tabs__item--active' : ''}`} href="#">
-              <span onClick={clickHandler}>{city.name}</span>
+          <li onClick={() => clickHandler(city.name)} key={keyValue} className="locations__item">
+            <a className={classNames('locations__item-link', 'tabs__item', {'tabs__item--active': city.name === currentCity})} href="#">
+              <span>{city.name}</span>
             </a>
           </li>
         );

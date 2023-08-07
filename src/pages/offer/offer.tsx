@@ -16,7 +16,8 @@ type OfferProps = {
 function Offer({offers}: OfferProps): JSX.Element {
   const {id} = useParams();
   const [currentOffer, setCurrentOffer] = useState(offers[0]);
-  const currentCity: string = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state.city);
+  const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
 
   useEffect(() => {
     offers.map((offer) => {
@@ -163,7 +164,7 @@ function Offer({offers}: OfferProps): JSX.Element {
           <section className="offer__map map">
             <div>
               <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Map city={CITIES.filter((city) => city.name === currentCity)[0]} offers={restOffers} selectedOffer={undefined} height={'579px'} width={'1144px'} />
+                <Map city={currentCityData} offers={restOffers} selectedOffer={null} height={'579px'} width={'1144px'} />
               </div>
             </div>
           </section>

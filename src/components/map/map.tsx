@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css';
 type MapProps ={
   city: City;
   offers: OfferType[];
-  selectedOffer: OfferType | undefined;
+  selectedOffer: OfferType | null;
   height: string | number | undefined;
   width: string | undefined;
 }
@@ -45,7 +45,7 @@ function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Eleme
           lng: offer.lng,
         });
 
-        marker.setIcon(selectedOffer !== undefined && offer.name === selectedOffer.name ? currentCustomIcon : defaultCustomIcon)
+        marker.setIcon(selectedOffer !== null && offer.name === selectedOffer.name ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerLayer);
       });
 
