@@ -25,13 +25,6 @@ type Date = {
   year: number;
 }
 
-type Host = {
-  name: string;
-  photo: string;
-  description: string;
-  proStatus: boolean;
-}
-
 export type ReviewType = {
   name: string;
   photo: string;
@@ -41,6 +34,30 @@ export type ReviewType = {
 }
 
 export type OfferType = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+}
+
+/* export type OfferType = {
   price: number;
   name: string;
   id: string;
@@ -55,7 +72,7 @@ export type OfferType = {
   host: Host;
   reviews: ReviewType[];
   city: string;
-}
+} */
 
 const offers: OfferType[] = [
   {

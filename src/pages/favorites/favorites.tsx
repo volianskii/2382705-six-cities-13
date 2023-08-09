@@ -1,12 +1,17 @@
+import {useEffect} from 'react';
 import Logo from '../../components/logo/logo.tsx';
-import {OfferType} from '../../mocks/offers.ts';
+import {useAppSelector} from '../../hooks/index.ts';
+import {fetchFavoritesAction} from '../../store/api-actions.ts';
+import {OfferType} from '../../types/offer.ts';
+import {store} from '../../store/index.ts';
 
-type FavoritesProps = {
-  offers: OfferType[];
-}
+function Favorites(): JSX.Element {
 
+  useEffect(() => {
+    store.dispatch(fetchFavoritesAction());
+  }, []);
+  const favorites: OfferType[] = useAppSelector((state) => state.favorites);
 
-function Favorites({offers}: FavoritesProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -49,10 +54,10 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
                 </div>
                 <div className="favorites__places">
 
-                  {offers.map((offer) =>
+                  {favorites.map((offer) =>
                     (
                       <article className="favorites__card place-card" key={offer.id}>
-                        {offer.premium &&
+                        {offer.isPremium &&
                           <div className="place-card__mark">
                             <span>Premium</span>
                           </div>}
@@ -81,7 +86,7 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
                             </div>
                           </div>
                           <h2 className="place-card__name">
-                            <a href="#">{offer.name}</a>
+                            <a href="#">{offer.title}</a>
                           </h2>
                           <p className="place-card__type">{offer.type}</p>
                         </div>

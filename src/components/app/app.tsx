@@ -5,13 +5,17 @@ import Offer from '../../pages/offer/offer.tsx';
 import Page404 from '../../pages/page404/page404.tsx';
 import PrivateRoute from '../../components/private-route/private-route.tsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {OfferType} from '../../mocks/offers.ts';
+import {useAppSelector} from '../../hooks/index.ts';
+import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 
-type AppProps = {
-  offers: OfferType[];
-};
+function App(): JSX.Element {
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
-function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -21,11 +25,11 @@ function App({offers}: AppProps): JSX.Element {
           path='/favorites'
           element={
             <PrivateRoute isAuth>
-              <Favorites offers={offers}/>
+              <Favorites />
             </PrivateRoute>
           }
         />
-        <Route path='/offer/:id' element={<Offer offers={offers}/>} />
+        <Route path='/offer/:id' element={<Offer />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
     </BrowserRouter>

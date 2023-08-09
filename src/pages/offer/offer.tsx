@@ -1,33 +1,31 @@
 import Logo from '../../components/logo/logo.tsx';
 import CommentForm from '../../components/comment-form/comment-form.tsx';
 import {useParams} from 'react-router-dom';
-import {useState, useEffect} from 'react';
-import {OfferType} from '../../mocks/offers.ts';
+import {useEffect} from 'react';
+import {FullOfferType, OfferType} from '../../types/offer.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
 import {CITIES} from '../../mocks/city.ts';
 import {useAppSelector} from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
+import {store} from '../../store/index.ts';
+import {fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction} from '../../store/api-actions.ts';
+import { Comment } from '../../types/comment.ts';
 
-type OfferProps = {
-  offers: OfferType[];
-};
-
-function Offer({offers}: OfferProps): JSX.Element {
+function Offer(): JSX.Element {
   const {id} = useParams();
-  const [currentOffer, setCurrentOffer] = useState(offers[0]);
+  useEffect(() => {
+    store.dispatch(fetchFullOfferAction(id));
+    store.dispatch(fetchNearbyOffersAction(id));
+    store.dispatch(fetchOfferCommentsAction(id));
+  }, [id]);
+  const currentOffer: FullOfferType = useAppSelector((state) => state.offer);
+  const nearbyOffers: OfferType[] = useAppSelector((state) => state.nearbyOffers);
+  const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
   const currentCity = useAppSelector((state) => state.city);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
 
-  useEffect(() => {
-    offers.map((offer) => {
-      if(offer.id === id) {
-        setCurrentOffer(offer);
-      }
-    });
-  });
-
-  const restOffers = offers.filter((offer) => offer !== currentOffer);
+  /* const restOffers = offers.filter((offer) => offer !== currentOffer); */
 
   return (
     <div className="page">
@@ -82,14 +80,14 @@ function Offer({offers}: OfferProps): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {currentOffer.premium ?
+              {currentOffer?.isPremium ?
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div> :
                 null}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {currentOffer.name}
+                  {currentOffer?.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -103,31 +101,31 @@ function Offer({offers}: OfferProps): JSX.Element {
                   <span style={{width: '80%'}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
+                <span className="offer__rating-value rating__value">{currentOffer?.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {currentOffer.type}
+                  {currentOffer?.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {currentOffer.bedrooms} Bedrooms
+                  {currentOffer?.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {currentOffer.capacity} adults
+                  Max {currentOffer?.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{currentOffer.price}</b>
+                <b className="offer__price-value">&euro;{currentOffer?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {currentOffer.amenities.map((amenity, amenityId) => {
-                    const keyValue = `${amenityId}-amenity`;
+                  {currentOffer?.goods.map((good, goodId) => {
+                    const keyValue = `${goodId}-amenity`;
                     return (
                       <li className="offer__inside-item" key={keyValue}>
-                        {amenity}
+                        {good}
                       </li>
                     );
                   }
@@ -141,22 +139,22 @@ function Offer({offers}: OfferProps): JSX.Element {
                     <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                    {currentOffer.host.name}
+                    {currentOffer?.host.name}
                   </span>
-                  {currentOffer.host.proStatus &&
+                  {currentOffer?.host.isPro &&
                     <span className="offer__user-status">
                       Pro
                     </span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    {currentOffer.host.description}
+                    {currentOffer?.description}
                   </p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{currentOffer.reviews.length}</span></h2>
-                <ReviewList offer={currentOffer} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{currentOfferComments.length}</span></h2>
+                <ReviewList comments={currentOfferComments} />
                 <CommentForm />
               </section>
             </div>
@@ -164,7 +162,7 @@ function Offer({offers}: OfferProps): JSX.Element {
           <section className="offer__map map">
             <div>
               <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Map city={currentCityData} offers={restOffers} selectedOffer={null} height={'579px'} width={'1144px'} />
+                <Map city={currentCityData} offers={nearbyOffers} selectedOffer={null} height={'579px'} width={'1144px'} />
               </div>
             </div>
           </section>
@@ -173,7 +171,7 @@ function Offer({offers}: OfferProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <CardList
-              offers={restOffers}
+              offers={nearbyOffers}
               listProp={'near-places__list'}
               typeProp={'near-places'}
               tabsProp={'null'}
