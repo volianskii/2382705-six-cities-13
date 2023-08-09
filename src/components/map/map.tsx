@@ -2,14 +2,14 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../constants/marker-url';
 import useMap from '../../hooks/use-map';
-import {City} from '../../mocks/city.ts';
+import type {City} from '../../mocks/city.ts';
 import {OfferType} from '../../mocks/offers';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps ={
   city: City;
   offers: OfferType[];
-  selectedOffer: OfferType | undefined;
+  selectedOffer: OfferType | null;
   height: string | number | undefined;
   width: string | undefined;
 }
@@ -31,6 +31,12 @@ function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Eleme
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    if (map) {
+      map.setView([city.lat, city.lng], city.zoom);
+    }
+  }, [map, city]);
+
+  useEffect(() => {
     if(map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
@@ -39,7 +45,7 @@ function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Eleme
           lng: offer.lng,
         });
 
-        marker.setIcon(selectedOffer !== undefined && offer.name === selectedOffer.name ? currentCustomIcon : defaultCustomIcon)
+        marker.setIcon(selectedOffer !== null && offer.name === selectedOffer.name ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerLayer);
       });
 

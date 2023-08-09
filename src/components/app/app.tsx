@@ -8,15 +8,14 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {OfferType} from '../../mocks/offers.ts';
 
 type AppProps = {
-  cardsCount: number;
   offers: OfferType[];
 };
 
-function App({cardsCount, offers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainPage cardsCount={cardsCount} offers={offers}/>} />
+        <Route path='/' element={<MainPage />} />
         <Route path='/login' element={<Login />} />
         <Route
           path='/favorites'

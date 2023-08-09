@@ -5,7 +5,8 @@ import {useState, useEffect} from 'react';
 import {OfferType} from '../../mocks/offers.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
-import { CITY } from '../../mocks/city.ts';
+import {CITIES} from '../../mocks/city.ts';
+import {useAppSelector} from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
 
 type OfferProps = {
@@ -15,6 +16,8 @@ type OfferProps = {
 function Offer({offers}: OfferProps): JSX.Element {
   const {id} = useParams();
   const [currentOffer, setCurrentOffer] = useState(offers[0]);
+  const currentCity = useAppSelector((state) => state.city);
+  const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
 
   useEffect(() => {
     offers.map((offer) => {
@@ -161,7 +164,7 @@ function Offer({offers}: OfferProps): JSX.Element {
           <section className="offer__map map">
             <div>
               <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Map city={CITY} offers={restOffers} selectedOffer={undefined} height={'579px'} width={'1144px'} />
+                <Map city={currentCityData} offers={restOffers} selectedOffer={null} height={'579px'} width={'1144px'} />
               </div>
             </div>
           </section>
