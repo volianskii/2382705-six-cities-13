@@ -4,13 +4,14 @@ import {CITIES} from '../../mocks/city.ts';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import {useAppSelector} from '../../hooks/index.ts';
+import {OfferType} from '../../types/offer.ts';
 
 function MainPage(): JSX.Element {
 
   const currentOfferList = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
-  const currentCityOfferList = currentOfferList.filter((offer) => offer.city.name === currentCity);
+  const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
 
   return (
     <div className="page page--gray page--main">

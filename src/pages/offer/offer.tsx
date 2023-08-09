@@ -10,7 +10,7 @@ import {useAppSelector} from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
 import {store} from '../../store/index.ts';
 import {fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction} from '../../store/api-actions.ts';
-import { Comment } from '../../types/comment.ts';
+import {Comment} from '../../types/comment.ts';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
@@ -24,8 +24,6 @@ function Offer(): JSX.Element {
   const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
   const currentCity = useAppSelector((state) => state.city);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
-
-  /* const restOffers = offers.filter((offer) => offer !== currentOffer); */
 
   return (
     <div className="page">
@@ -58,24 +56,14 @@ function Offer(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {currentOffer?.images.map((image, imageId) => {
+                const keyValue = `${imageId}-image`;
+                return (
+                  <div className="offer__image-wrapper" key={keyValue}>
+                    <img className="offer__image" src={image} alt="Photo studio" />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="offer__container container">
