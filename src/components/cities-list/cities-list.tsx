@@ -1,6 +1,6 @@
 import {changeCity} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {CITIES} from '../../mocks/city.ts';
+import {CITIES} from '../../constants/city.ts';
 import classNames from 'classnames';
 
 function CitiesList(): JSX.Element {
