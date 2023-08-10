@@ -11,6 +11,7 @@ const initialState: {
   offerComments: Comment[];
   favorites: OfferType[];
   isOffersDataLoading: boolean;
+  authorizationStatus: string;
 } = {
   city: 'Paris',
   offers: [],
@@ -19,6 +20,7 @@ const initialState: {
   offerComments: [],
   favorites: [],
   isOffersDataLoading: false,
+  authorizationStatus: 'NOAUTH'
 };
 
 const reducer = createReducer(initialState, (builder) => {
