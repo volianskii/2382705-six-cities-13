@@ -1,7 +1,7 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
-import {Map, TileLayer} from 'leaflet';
-import type {City} from '../constants/city.ts';
-import {URL_MAP_LAYER, URL_MAP_ATTRIBUTION} from '../constants/map-url.ts';
+import { useEffect, useState, MutableRefObject, useRef } from 'react';
+import { Map, TileLayer } from 'leaflet';
+import type { City } from '../constants/city.ts';
+import { URL_MAP_LAYER, URL_MAP_ATTRIBUTION } from '../constants/map-url.ts';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
   const [map, setMap] = useState<Map | null>(null);

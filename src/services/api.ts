@@ -1,5 +1,5 @@
-import axios, {AxiosInstance} from 'axios';
-import {BACKEND_URL, REQUEST_TIMEOUT} from '../constants/api.ts';
+import axios, { AxiosInstance } from 'axios';
+import { BACKEND_URL, REQUEST_TIMEOUT } from '../constants/api.ts';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({

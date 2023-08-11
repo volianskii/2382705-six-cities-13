@@ -1,7 +1,7 @@
-import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, loadFavorites, loadNearbyOffers, loadOffer, loadOfferComments, loadOffers, setOffersDataLoadingStatus} from './action';
-import type {FullOfferType, OfferType} from '../types/offer';
-import {Comment} from '../types/comment';
+import { createReducer } from '@reduxjs/toolkit';
+import { changeCity, loadFavorites, loadNearbyOffers, loadOffer, loadOfferComments, loadOffers, setOffersDataLoadingStatus } from './action';
+import type { FullOfferType, OfferType } from '../types/offer';
+import { Comment } from '../types/comment';
 
 const initialState: {
   city: string;

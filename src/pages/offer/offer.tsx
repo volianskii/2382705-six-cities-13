@@ -6,11 +6,11 @@ import {FullOfferType, OfferType} from '../../types/offer.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
 import {CITIES} from '../../constants/city.ts';
-import {useAppSelector} from '../../hooks/index.ts';
+import { useAppSelector } from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
-import {store} from '../../store/index.ts';
-import {fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction} from '../../store/api-actions.ts';
-import {Comment} from '../../types/comment.ts';
+import { store } from '../../store/index.ts';
+import { fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction } from '../../store/api-actions.ts';
+import { Comment } from '../../types/comment.ts';
 
 function Offer(): JSX.Element {
   const {id} = useParams();

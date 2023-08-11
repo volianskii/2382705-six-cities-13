@@ -1,6 +1,6 @@
 import Card from '../card/card';
-import {useState} from 'react';
-import {OfferType} from '../../types/offer.ts';
+import { useState } from 'react';
+import { OfferType } from '../../types/offer.ts';
 
 type CardListProps = {
   offers: OfferType[];

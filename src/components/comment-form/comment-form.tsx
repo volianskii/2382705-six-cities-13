@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import StarButton from '../star-button/star-button.tsx';
 import starButtonDetails from '../../constants/star-button-details';
 
