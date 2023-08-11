@@ -1,11 +1,11 @@
 import Logo from '../../components/logo/logo.tsx';
 import CommentForm from '../../components/comment-form/comment-form.tsx';
-import {useParams} from 'react-router-dom';
-import {useEffect} from 'react';
-import {FullOfferType, OfferType} from '../../types/offer.ts';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { FullOfferType, OfferType } from '../../types/offer.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
-import {CITIES} from '../../constants/city.ts';
+import { CITIES } from '../../constants/city.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
 import { store } from '../../store/index.ts';
