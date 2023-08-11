@@ -5,4 +5,6 @@ export enum APIRoute {
   Offers = '/offers',
   Comments = '/comments',
   Favorites = '/favorite',
+  Login = '/login',
+  Logout = '/logout'
 }

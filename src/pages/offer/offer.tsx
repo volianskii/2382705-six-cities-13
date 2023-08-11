@@ -1,4 +1,3 @@
-import Logo from '../../components/logo/logo.tsx';
 import CommentForm from '../../components/comment-form/comment-form.tsx';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
@@ -11,6 +10,7 @@ import CardList from '../../components/card-list/card-list.tsx';
 import {store} from '../../store/index.ts';
 import {fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction} from '../../store/api-actions.ts';
 import {Comment} from '../../types/comment.ts';
+import Header from '../../components/header/header.tsx';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
@@ -27,30 +27,7 @@ function Offer(): JSX.Element {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--offer">
         <section className="offer">

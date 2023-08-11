@@ -4,9 +4,12 @@ import Login from '../../pages/login/login.tsx';
 import Offer from '../../pages/offer/offer.tsx';
 import Page404 from '../../pages/page404/page404.tsx';
 import PrivateRoute from '../../components/private-route/private-route.tsx';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
+import browserHistory from '../../services/browser-history.ts';
+import HistoryRouter from '../history-route/history-route.tsx';
+
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
@@ -17,14 +20,14 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='/login' element={<Login />} />
         <Route
           path='/favorites'
           element={
-            <PrivateRoute isAuth>
+            <PrivateRoute>
               <Favorites />
             </PrivateRoute>
           }
@@ -32,7 +35,7 @@ function App(): JSX.Element {
         <Route path='/offer/:id' element={<Offer />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
