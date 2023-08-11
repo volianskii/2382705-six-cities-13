@@ -4,7 +4,7 @@ import './loading-screen.css';
 
 function LoadingScreen(): JSX.Element {
   return (
-    <div className='container'>
+    <div className='spinner-container'>
       <GridLoader color={COLORS.Blue} size={50} />
     </div>
   );

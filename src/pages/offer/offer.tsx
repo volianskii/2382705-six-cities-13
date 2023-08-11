@@ -14,16 +14,17 @@ import { Comment } from '../../types/comment.ts';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
-  useEffect(() => {
-    store.dispatch(fetchFullOfferAction(id));
-    store.dispatch(fetchNearbyOffersAction(id));
-    store.dispatch(fetchOfferCommentsAction(id));
-  }, [id]);
   const currentOffer: FullOfferType = useAppSelector((state) => state.offer);
   const nearbyOffers: OfferType[] = useAppSelector((state) => state.nearbyOffers);
   const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
   const currentCity = useAppSelector((state) => state.city);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
+
+  useEffect(() => {
+    store.dispatch(fetchFullOfferAction(id));
+    store.dispatch(fetchNearbyOffersAction(id));
+    store.dispatch(fetchOfferCommentsAction(id));
+  }, [id]);
 
   return (
     <div className="page">
