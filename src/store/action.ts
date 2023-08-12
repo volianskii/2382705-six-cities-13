@@ -1,7 +1,7 @@
-import {createAction} from '@reduxjs/toolkit';
-import type {FullOfferType, OfferType} from '../types/offer';
-import type {Comment} from '../types/comment';
-import {AuthorizationStatus} from '../types/authorization';
+import { createAction } from '@reduxjs/toolkit';
+import type { FullOfferType, OfferType } from '../types/offer';
+import type { Comment } from '../types/comment';
+import { AuthorizationStatus } from '../types/authorization';
 
 
 export const changeCity = createAction<string>('CITIES/changeActiveCity');

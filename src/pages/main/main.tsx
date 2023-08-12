@@ -1,10 +1,10 @@
 import CardList from '../../components/card-list/card-list.tsx';
-import {CITIES} from '../../constants/city.ts';
+import { CITIES } from '../../constants/city.ts';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
-import {useAppSelector} from '../../hooks/index.ts';
-import {OfferType} from '../../types/offer.ts';
 import Header from '../../components/header/header.tsx';
+import { useAppSelector } from '../../hooks/index.ts';
+import { OfferType } from '../../types/offer.ts';
 
 function MainPage(): JSX.Element {
 

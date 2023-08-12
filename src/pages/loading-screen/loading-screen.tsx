@@ -1,9 +1,11 @@
-import {GridLoader} from 'react-spinners';
+import { GridLoader } from 'react-spinners';
+import { COLORS } from '../../constants/colors.ts';
+import './loading-screen.css';
 
 function LoadingScreen(): JSX.Element {
   return (
-    <div style={{height:'100vh', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
-      <GridLoader color='#6f96e5' size={50} />
+    <div className='spinner-container'>
+      <GridLoader color={COLORS.Blue} size={50} />
     </div>
   );
 }

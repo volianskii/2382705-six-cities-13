@@ -1,29 +1,30 @@
 import CommentForm from '../../components/comment-form/comment-form.tsx';
-import {useParams} from 'react-router-dom';
-import {useEffect} from 'react';
-import {FullOfferType, OfferType} from '../../types/offer.ts';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { FullOfferType, OfferType } from '../../types/offer.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
-import {CITIES} from '../../constants/city.ts';
-import {useAppSelector} from '../../hooks/index.ts';
+import { CITIES } from '../../constants/city.ts';
+import { useAppSelector } from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
-import {store} from '../../store/index.ts';
-import {fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction} from '../../store/api-actions.ts';
-import {Comment} from '../../types/comment.ts';
+import { store } from '../../store/index.ts';
+import { fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction } from '../../store/api-actions.ts';
+import { Comment } from '../../types/comment.ts';
 import Header from '../../components/header/header.tsx';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
+  const currentOffer: FullOfferType | null = useAppSelector((state) => state.offer);
+  const nearbyOffers: OfferType[] = useAppSelector((state) => state.nearbyOffers);
+  const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
+  const currentCity = useAppSelector((state) => state.city);
+  const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
+
   useEffect(() => {
     store.dispatch(fetchFullOfferAction(id));
     store.dispatch(fetchNearbyOffersAction(id));
     store.dispatch(fetchOfferCommentsAction(id));
   }, [id]);
-  const currentOffer: FullOfferType = useAppSelector((state) => state.offer);
-  const nearbyOffers: OfferType[] = useAppSelector((state) => state.nearbyOffers);
-  const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
-  const currentCity = useAppSelector((state) => state.city);
-  const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
 
   return (
     <div className="page">

@@ -1,18 +1,17 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import Logo from '../../components/logo/logo.tsx';
-import {useAppSelector} from '../../hooks/index.ts';
-import {fetchFavoritesAction} from '../../store/api-actions.ts';
-import {store} from '../../store/index.ts';
-import {Link} from 'react-router-dom';
-import {OfferType} from '../../types/offer.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import { fetchFavoritesAction } from '../../store/api-actions.ts';
+import { store } from '../../store/index.ts';
+import { Link } from 'react-router-dom';
+import { OfferType } from '../../types/offer.ts';
 import Header from '../../components/header/header.tsx';
 
 function Favorites(): JSX.Element {
-
+  const favorites: OfferType[] = useAppSelector((state) => state.favorites);
   useEffect(() => {
     store.dispatch(fetchFavoritesAction());
   }, []);
-  const favorites: OfferType[] = useAppSelector((state) => state.favorites);
 
   return (
     favorites.length !== 0 ?
