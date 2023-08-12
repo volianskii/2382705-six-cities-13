@@ -1,23 +1,17 @@
 import Logo from '../../components/logo/logo.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
-import {CITIES} from '../../mocks/city.ts';
+import { CITIES } from '../../constants/city.ts';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
-import {useEffect} from 'react';
-import {getOffers} from '../../store/action.ts';
-import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import { OfferType } from '../../types/offer.ts';
 
 function MainPage(): JSX.Element {
-  const dispatch = useAppDispatch();
 
   const currentOfferList = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
-  const currentCityOfferList = currentOfferList.filter((offer) => offer.city === currentCity);
-
-  useEffect(() => {
-    dispatch(getOffers());
-  }, []);
+  const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
 
   return (
     <div className="page page--gray page--main">
@@ -81,7 +75,7 @@ function MainPage(): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
+              <section className="cities__map map" style={{backgroundImage: 'none'}}>
                 <Map
                   city={currentCityData}
                   offers={currentCityOfferList} selectedOffer={null} height={'814px'}

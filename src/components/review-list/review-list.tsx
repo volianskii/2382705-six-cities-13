@@ -1,16 +1,16 @@
-import {OfferType} from '../../mocks/offers';
+import { Comment } from '../../types/comment.ts';
 import Review from '../review/review.tsx';
 
 type ReviewListProps = {
-  offer: OfferType;
+  comments: Comment[];
 };
 
-const ReviewList = ({offer}: ReviewListProps): JSX.Element => (
+const ReviewList = ({comments}: ReviewListProps): JSX.Element => (
   <ul className="reviews__list">
-    {offer.reviews.map((review, reviewId) => {
-      const keyValue = `${reviewId}-review`;
+    {comments.map((comment, commentId) => {
+      const keyValue = `${commentId}-review`;
       return (
-        <Review key={keyValue} review={review} />
+        <Review key={keyValue} comment={comment} />
       );
     })}
   </ul>

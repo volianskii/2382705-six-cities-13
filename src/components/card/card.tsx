@@ -1,5 +1,5 @@
-import {Link} from 'react-router-dom';
-import {OfferType} from '../../mocks/offers.ts';
+import { Link } from 'react-router-dom';
+import { OfferType } from '../../types/offer.ts';
 
 type CardProps = {
   offer: OfferType;
@@ -11,13 +11,13 @@ type CardProps = {
 function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
   return (
     <article className={`${type}__card place-card`} key={key} onMouseEnter={() => onMouseEnter(offer.id)}>
-      {offer.premium &&
+      {offer.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
       <div className={`${type}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -41,7 +41,7 @@ function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
         </div>
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>
-            {offer.name}
+            {offer.title}
           </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>

@@ -1,4 +1,4 @@
-import {StarButtonDetailsType} from '../components/star-button/star-button';
+import { StarButtonDetailsType } from '../components/star-button/star-button';
 
 const starButtonDetails: StarButtonDetailsType[] = [
   {

@@ -1,18 +1,18 @@
-import {ReviewType} from '../../mocks/offers';
+import { Comment } from '../../types/comment.ts';
 
 type ReviewProps = {
   key: string;
-  review: ReviewType;
+  comment: Comment;
 };
 
-const Review = ({key, review}: ReviewProps): JSX.Element => (
+const Review = ({key, comment}: ReviewProps): JSX.Element => (
   <li className="reviews__item" key={key}>
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+        <img className="reviews__avatar user__avatar" src={comment.user.avatarURL} width="54" height="54" alt="Reviews avatar" />
       </div>
       <span className="reviews__user-name">
-        {review.name}
+        {comment.user.name}
       </span>
     </div>
     <div className="reviews__info">
@@ -23,9 +23,9 @@ const Review = ({key, review}: ReviewProps): JSX.Element => (
         </div>
       </div>
       <p className="reviews__text">
-        {review.review}
+        {comment.comment}
       </p>
-      <time className="reviews__time" dateTime="2019-04-24">{review.date.month} {review.date.year}</time>
+      <time className="reviews__time" dateTime="2019-04-24">{comment.date}</time>
     </div>
   </li>
 );
