@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-actions.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { useDispatch } from 'react-redux';
+import { AuthorizationStatus } from '../../types/authorization.ts';
 
 function Header(): JSX.Element {
   const isAuth = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useDispatch();
+  const clickHandler = () => {
+    dispatch(logoutAction());
+  };
 
   return (
     <header className="header">
@@ -15,7 +19,7 @@ function Header(): JSX.Element {
           <Logo />
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {isAuth !== 'AUTH'
+              {isAuth !== AuthorizationStatus.Auth
                 ?
                 <li className="header__nav-item user">
                   <Link to='/login' className="header__nav-link header__nav-link--profile">
@@ -34,14 +38,10 @@ function Header(): JSX.Element {
                       <span className="header__favorite-count">3</span>
                     </a>
                   </li>
-                  <li className="header__nav-item" onClick={(evt) => {
-                    evt.preventDefault();
-                    dispatch(logoutAction());
-                  }}
-                  >
-                    <a className="header__nav-link" href="#">
+                  <li className="header__nav-item" onClick={clickHandler}>
+                    <Link to='' className="header__nav-link">
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </Link>
                   </li>
                 </>}
             </ul>
