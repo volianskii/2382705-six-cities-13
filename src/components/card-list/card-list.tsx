@@ -1,5 +1,5 @@
-import Card from '../card/card';
-import { useState } from 'react';
+import CardMemo from '../card/card';
+import { useCallback, useState } from 'react';
 import { OfferType } from '../../types/offer.ts';
 
 type CardListProps = {
@@ -12,13 +12,13 @@ type CardListProps = {
 function CardList({offers, listProp, typeProp, tabsProp}: CardListProps) {
   const [, setActiveCard] = useState('first');
 
-  const mouseHandler = (hoverCardId: string): void => {
+  const mouseHandler = useCallback((hoverCardId: string): void => {
     setActiveCard(hoverCardId);
-  };
+  }, []);
 
   return (
     <div className={`${listProp} places__list ${tabsProp}`}>
-      {offers.map((offer) => <Card offer={offer} key={offer.id} onMouseEnter={mouseHandler} type={typeProp} />)}
+      {offers.map((offer) => <CardMemo offer={offer} key={offer.id} onMouseEnter={mouseHandler} type={typeProp} />)}
     </div>
   );
 }
