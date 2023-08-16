@@ -1,4 +1,4 @@
-import {combineReducers} from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../constants/store';
 import { userData } from './user-data/user-data';
 import { offerData } from './offer-data/offer-data';
