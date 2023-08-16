@@ -7,10 +7,12 @@ const initialState: {
   offers: OfferType[];
   isOffersDataLoading: boolean;
   city: string;
+  hasError: boolean;
 } = {
   offers: [],
   isOffersDataLoading: false,
-  city: 'Paris'
+  city: 'Paris',
+  hasError: false
 };
 
 export const offersData = createSlice({
@@ -25,6 +27,7 @@ export const offersData = createSlice({
     builder
       .addCase(fetchOfferAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.hasError = false;
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.isOffersDataLoading = false;
@@ -32,6 +35,7 @@ export const offersData = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOffersDataLoading = false;
+        state.hasError = true;
       });
   }
 });

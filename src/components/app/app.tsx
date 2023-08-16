@@ -7,15 +7,17 @@ import PrivateRoute from '../../components/private-route/private-route.tsx';
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
+import ErrorScreen from '../../pages/error-screen/error-screen.tsx';
 import browserHistory from '../../services/browser-history.ts';
 import HistoryRouter from '../history-route/history-route.tsx';
 import { useEffect } from 'react';
 import { store } from '../../store/index.ts';
 import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
-import { getLoadingStatus } from '../../store/offers-data/selectors.ts';
+import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/selectors.ts';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
+  const hasError = useAppSelector(getErrorStatus);
   useEffect(() => {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());
@@ -24,6 +26,12 @@ function App(): JSX.Element {
   if (isOffersDataLoading) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (hasError) {
+    return (
+      <ErrorScreen />
     );
   }
 
