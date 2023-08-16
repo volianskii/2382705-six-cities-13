@@ -4,7 +4,7 @@ import './error-screen.css';
 
 function ErrorScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const clickHandler = () => dispatch(fetchOfferAction());
+  const clickHandler = (): void => dispatch(fetchOfferAction());
 
   return (
     <div className='container-center'>
