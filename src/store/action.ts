@@ -1,10 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import type { FullOfferType, OfferType } from '../types/offer';
+/* import type { FullOfferType, OfferType } from '../types/offer';
 import type { Comment } from '../types/comment';
-import { AuthorizationStatus } from '../types/authorization';
+import { AuthorizationStatus } from '../types/authorization'; */
 
 
-export const changeCity = createAction<string>('CITIES/changeActiveCity');
+/* export const changeCity = createAction<string>('CITIES/changeActiveCity');
 
 export const loadOffers = createAction<OfferType[]>('data/loadOffers');
 
@@ -18,7 +18,7 @@ export const loadFavorites = createAction<OfferType[]>('data/loadFavorites');
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
-export const setAuthorizationStatus = createAction<AuthorizationStatus>('data/setAuthorizationStatus');
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('data/setAuthorizationStatus'); */
 
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
 

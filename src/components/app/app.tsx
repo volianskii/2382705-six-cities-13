@@ -12,9 +12,10 @@ import HistoryRouter from '../history-route/history-route.tsx';
 import { useEffect } from 'react';
 import { store } from '../../store/index.ts';
 import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
+import { getLoadingStatus } from '../../store/offers-data/selectors.ts';
 
 function App(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOffersDataLoading = useAppSelector(getLoadingStatus);
   useEffect(() => {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());

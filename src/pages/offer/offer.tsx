@@ -11,13 +11,17 @@ import { store } from '../../store/index.ts';
 import { fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction } from '../../store/api-actions.ts';
 import { Comment } from '../../types/comment.ts';
 import Header from '../../components/header/header.tsx';
+import { getOffer } from '../../store/offer-data/selectors.ts';
+import { getNearbyOffers } from '../../store/nearby-data/selectors.ts';
+import { getComments } from '../../store/comments-data/selectors.ts';
+import { getActiveCity } from '../../store/offers-data/selectors.ts';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
-  const currentOffer: FullOfferType | null = useAppSelector((state) => state.offer);
-  const nearbyOffers: OfferType[] = useAppSelector((state) => state.nearbyOffers);
-  const currentOfferComments: Comment[] = useAppSelector((state) => state.offerComments);
-  const currentCity = useAppSelector((state) => state.city);
+  const currentOffer: FullOfferType | null = useAppSelector(getOffer);
+  const nearbyOffers: OfferType[] = useAppSelector(getNearbyOffers);
+  const currentOfferComments: Comment[] = useAppSelector(getComments);
+  const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
 
   useEffect(() => {

@@ -5,11 +5,12 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import { useAppSelector } from '../../hooks/index.ts';
 import { OfferType } from '../../types/offer.ts';
+import { getActiveCity, getOffers } from '../../store/offers-data/selectors.ts';
 
 function MainPage(): JSX.Element {
 
-  const currentOfferList = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.city);
+  const currentOfferList = useAppSelector(getOffers);
+  const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
   const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
 

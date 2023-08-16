@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-actions.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { useDispatch } from 'react-redux';
+import { getAuthStatus } from '../../store/user-data/selectors';
 
 function Header(): JSX.Element {
-  const isAuth = useAppSelector((state) => state.authorizationStatus);
+  const isAuth = useAppSelector(getAuthStatus);
   const dispatch = useDispatch();
 
   return (
