@@ -73,6 +73,32 @@ export const fetchFavoritesAction = createAsyncThunk<OfferType[], undefined, {
   }
 );
 
+export const addFavoritesAction = createAsyncThunk<FullOfferType, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'FAVORITES/addFavorites',
+  async (id, {extra: api}) => {
+    const {data} = await api.post<FullOfferType>(`${APIRoute.Favorites}/${id}/1`);
+
+    return data;
+  }
+);
+
+export const deleteFavoritesAction = createAsyncThunk<FullOfferType, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'FAVORITES/deleteFavorites',
+  async (id, {extra: api}) => {
+    const {data} = await api.post<FullOfferType>(`${APIRoute.Favorites}/${id}/0`);
+
+    return data;
+  }
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;

@@ -46,7 +46,7 @@ function App(): JSX.Element {
         <Route
           path='/favorites'
           element={
-            <PrivateRoute isAuth={isAuth}>
+            <PrivateRoute isAuth={'AUTH'}>
               <Favorites />
             </PrivateRoute>
           }

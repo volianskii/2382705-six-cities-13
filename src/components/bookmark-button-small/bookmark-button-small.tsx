@@ -2,28 +2,30 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthStatus } from '../../store/user-data/selectors';
 import classNames from 'classnames';
+import { AuthorizationStatus } from '../../types/authorization';
+import { addFavoritesAction, deleteFavoritesAction } from '../../store/api-actions';
 
 type BookmarkButtonProps = {
   id: string;
   isActive: boolean;
 };
 
-function BookmarkButton({id, isActive}: BookmarkButtonProps) {
+function BookmarkButtonSmall({id, isActive}: BookmarkButtonProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector(getAuthStatus);
 
   const handleClick = () => {
-    if (isAuthorized) {
+    if (isAuthorized !== AuthorizationStatus.Auth) {
       navigate('/login');
       return;
     }
     if(isActive) {
-      dispatch(deleteFavorite(id));
+      dispatch(deleteFavoritesAction(id));
       //добавить в редюсер
     } else {
       //добавить в редюсер
-      dispatch(addFavorite(id));
+      dispatch(addFavoritesAction(id));
     }
   };
 
@@ -40,4 +42,4 @@ function BookmarkButton({id, isActive}: BookmarkButtonProps) {
   );
 }
 
-export default BookmarkButton;
+export default BookmarkButtonSmall;
