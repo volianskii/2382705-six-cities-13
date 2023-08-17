@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-actions.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { useDispatch } from 'react-redux';
-import { getAuthStatus } from '../../store/user-data/selectors';
+import { getAuthStatus, getUserInfo } from '../../store/user-data/selectors';
 import { AuthorizationStatus } from '../../types/authorization.ts';
 
 function Header(): JSX.Element {
   const isAuth = useAppSelector(getAuthStatus);
+  const user = useAppSelector(getUserInfo);
   const dispatch = useDispatch();
   const clickHandler = () => {
     dispatch(logoutAction());
@@ -35,7 +36,7 @@ function Header(): JSX.Element {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{user?.email}</span>
                       <span className="header__favorite-count">3</span>
                     </a>
                   </li>

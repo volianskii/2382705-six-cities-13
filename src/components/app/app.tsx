@@ -14,10 +14,13 @@ import { useEffect } from 'react';
 import { store } from '../../store/index.ts';
 import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
 import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/selectors.ts';
+import { getAuthStatus } from '../../store/user-data/selectors.ts';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
+  const isAuth = useAppSelector(getAuthStatus);
+
   useEffect(() => {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());
@@ -43,7 +46,7 @@ function App(): JSX.Element {
         <Route
           path='/favorites'
           element={
-            <PrivateRoute>
+            <PrivateRoute isAuth={isAuth}>
               <Favorites />
             </PrivateRoute>
           }
