@@ -7,12 +7,11 @@ import { getFavorites } from '../../store/favorites-data/selectors.ts';
 
 type CardProps = {
   offer: OfferType;
-  key: string;
   onMouseEnter: (hoverCardId: string) => void;
   type: string;
 };
 
-function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
+function Card({offer, onMouseEnter, type}: CardProps): JSX.Element {
   const favorites = useAppSelector(getFavorites);
   let isActive = false;
   if (favorites.filter((item) => item.id === offer.id).length === 0) {
@@ -21,7 +20,7 @@ function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
     isActive = true;
   }
   return (
-    <article className={`${type}__card place-card`} key={key} onMouseEnter={() => onMouseEnter(offer.id)}>
+    <article className={`${type}__card place-card`} onMouseEnter={() => onMouseEnter(offer.id)}>
       {offer.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

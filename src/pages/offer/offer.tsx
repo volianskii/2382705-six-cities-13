@@ -15,6 +15,8 @@ import { getOffer } from '../../store/offer-data/selectors.ts';
 import { getNearbyOffers } from '../../store/nearby-data/selectors.ts';
 import { getComments } from '../../store/comments-data/selectors.ts';
 import { getActiveCity } from '../../store/offers-data/selectors.ts';
+import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-button-big.tsx';
+import { getFavorites } from '../../store/favorites-data/selectors.ts';
 
 function Offer(): JSX.Element {
   const {id} = useParams();
@@ -23,6 +25,13 @@ function Offer(): JSX.Element {
   const currentOfferComments: Comment[] = useAppSelector(getComments);
   const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
+  const favorites = useAppSelector(getFavorites);
+  let isActive = false;
+  if (favorites.filter((item) => item.id === currentOffer?.id).length === 0) {
+    isActive = false;
+  } else {
+    isActive = true;
+  }
 
   useEffect(() => {
     store.dispatch(fetchFullOfferAction(id));
@@ -59,12 +68,7 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {currentOffer?.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButtonBig id={currentOffer?.id} isActive={isActive} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

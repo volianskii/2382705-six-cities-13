@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useAppSelector } from '../../hooks/index.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import { fetchFavoritesAction } from '../../store/api-actions.ts';
-import { store } from '../../store/index.ts';
 import { OfferType } from '../../types/offer.ts';
 import Header from '../../components/header/header.tsx';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
@@ -9,9 +8,10 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty.tsx
 
 function Favorites(): JSX.Element {
   const favorites: OfferType[] = useAppSelector(getFavorites);
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    store.dispatch(fetchFavoritesAction());
-  }, []);
+    dispatch(fetchFavoritesAction());
+  });
 
   return (
     favorites.length !== 0 ?

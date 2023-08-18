@@ -12,9 +12,11 @@ import browserHistory from '../../services/browser-history.ts';
 import HistoryRouter from '../history-route/history-route.tsx';
 import { useEffect } from 'react';
 import { store } from '../../store/index.ts';
-import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
+import { fetchOfferAction, checkAuthAction, fetchFavoritesAction } from '../../store/api-actions.ts';
 import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/selectors.ts';
 import { getAuthStatus } from '../../store/user-data/selectors.ts';
+import { AuthorizationStatus } from '../../types/authorization.ts';
+import { clearFavorites } from '../../store/favorites-data/favorites-data.ts';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
@@ -25,6 +27,13 @@ function App(): JSX.Element {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());
   }, []);
+  useEffect(() => {
+    if (isAuth === AuthorizationStatus.Auth) {
+      store.dispatch(fetchFavoritesAction());
+    } else {
+      store.dispatch(clearFavorites());
+    }
+  }, [isAuth]);
 
   if (isOffersDataLoading) {
     return (

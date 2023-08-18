@@ -14,6 +14,7 @@ function MainPage(): JSX.Element {
   const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
   const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
+  //для отображения кнопок избранного на карточках
 
   return (
     <div className="page page--gray page--main">
