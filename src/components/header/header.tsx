@@ -1,5 +1,5 @@
 import Logo from '../logo/logo';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-actions.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { useDispatch } from 'react-redux';
@@ -11,13 +11,9 @@ function Header(): JSX.Element {
   const isAuth = useAppSelector(getAuthStatus);
   const user = useAppSelector(getUserInfo);
   const favorites = useAppSelector(getFavorites);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const signOutClickHandler = () => {
     dispatch(logoutAction());
-  };
-  const emailClickHandler = () => {
-    navigate('/favorites');
   };
 
   return (
@@ -39,12 +35,12 @@ function Header(): JSX.Element {
                 :
                 <>
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#" onClick={emailClickHandler}>
+                    <Link to='/favorites' className="header__nav-link header__nav-link--profile" >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{user?.email}</span>
                       <span className="header__favorite-count">{favorites.length}</span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="header__nav-item" onClick={signOutClickHandler}>
                     <Link to='' className="header__nav-link">
