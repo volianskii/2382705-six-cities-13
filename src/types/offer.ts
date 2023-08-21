@@ -36,3 +36,5 @@ export type FullOfferType = Omit<OfferType & {
   images: string[];
   maxAdults: number;
 }, 'previewImage'>;
+
+export type CombinedOfferType = OfferType | FullOfferType;

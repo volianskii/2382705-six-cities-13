@@ -3,13 +3,13 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../constants/marker-url';
 import useMap from '../../hooks/use-map';
 import type { City } from '../../constants/city.ts';
-import { OfferType } from '../../types/offer';
+import { CombinedOfferType, FullOfferType, OfferType } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps ={
   city: City;
-  offers: OfferType[];
-  selectedOffer: OfferType | null;
+  offers: CombinedOfferType[];
+  selectedOffer: OfferType | null | FullOfferType;
   height: string | number | undefined;
   width: string | undefined;
 }

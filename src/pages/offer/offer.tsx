@@ -1,7 +1,7 @@
 import CommentForm from '../../components/comment-form/comment-form.tsx';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { FullOfferType, OfferType } from '../../types/offer.ts';
+import { CombinedOfferType, FullOfferType, OfferType } from '../../types/offer.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { CITIES } from '../../constants/city.ts';
@@ -17,11 +17,16 @@ import { getComments } from '../../store/comments-data/selectors.ts';
 import { getActiveCity } from '../../store/offers-data/selectors.ts';
 import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-button-big.tsx';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
-
 function Offer(): JSX.Element {
   const {id} = useParams();
   const currentOffer: FullOfferType | null = useAppSelector(getOffer);
   const nearbyOffers: OfferType[] = useAppSelector(getNearbyOffers);
+  const nearbyUniqueOffers: OfferType[] = nearbyOffers.filter((offer) => offer.title !== currentOffer?.title);
+  const nearbySomeOffers = nearbyUniqueOffers.slice(0, 3);
+  const nearbyMapOffers: CombinedOfferType[] = nearbyUniqueOffers.slice(0, 3);
+  if (currentOffer) {
+    nearbyMapOffers.push(currentOffer);
+  }
   const currentOfferComments: Comment[] = useAppSelector(getComments);
   const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
@@ -31,6 +36,30 @@ function Offer(): JSX.Element {
     isActive = false;
   } else {
     isActive = true;
+  }
+  let ratingWidth = '0%';
+  if (currentOffer !== null) {
+    const roundedRating = Math.round(currentOffer.rating);
+    switch (roundedRating) {
+      case 0:
+        ratingWidth = '0%';
+        break;
+      case 1:
+        ratingWidth = '20%';
+        break;
+      case 2:
+        ratingWidth = '40%';
+        break;
+      case 3:
+        ratingWidth = '60%';
+        break;
+      case 4:
+        ratingWidth = '80%';
+        break;
+      case 5:
+        ratingWidth = '100%';
+        break;
+    }
   }
 
   useEffect(() => {
@@ -72,7 +101,7 @@ function Offer(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '60%'}}></span>
+                  <span style={{width: ratingWidth}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{currentOffer?.rating}</span>
@@ -136,7 +165,7 @@ function Offer(): JSX.Element {
           <section className="offer__map map">
             <div>
               <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Map city={currentCityData} offers={nearbyOffers} selectedOffer={null} height={'579px'} width={'1144px'} />
+                <Map city={currentCityData} offers={nearbyMapOffers} selectedOffer={currentOffer} height={'579px'} width={'1144px'} />
               </div>
             </div>
           </section>
@@ -145,7 +174,7 @@ function Offer(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <CardList
-              offers={nearbyOffers}
+              offers={nearbySomeOffers}
               listProp={'near-places__list'}
               typeProp={'near-places'}
               tabsProp={'null'}

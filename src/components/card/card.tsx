@@ -19,6 +19,30 @@ function Card({offer, onMouseEnter, type}: CardProps): JSX.Element {
   } else {
     isActive = true;
   }
+  const roundedRating = Math.round(offer.rating);
+  let ratingWidth = '0%';
+
+  switch (roundedRating) {
+    case 0:
+      ratingWidth = '0%';
+      break;
+    case 1:
+      ratingWidth = '20%';
+      break;
+    case 2:
+      ratingWidth = '40%';
+      break;
+    case 3:
+      ratingWidth = '60%';
+      break;
+    case 4:
+      ratingWidth = '80%';
+      break;
+    case 5:
+      ratingWidth = '100%';
+      break;
+  }
+
   return (
     <article className={`${type}__card place-card`} onMouseEnter={() => onMouseEnter(offer.id)}>
       {offer.isPremium &&
@@ -40,7 +64,7 @@ function Card({offer, onMouseEnter, type}: CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: ratingWidth}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
