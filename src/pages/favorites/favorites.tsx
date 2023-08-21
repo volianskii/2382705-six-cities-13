@@ -6,9 +6,10 @@ import { store } from '../../store/index.ts';
 import { Link } from 'react-router-dom';
 import { OfferType } from '../../types/offer.ts';
 import Header from '../../components/header/header.tsx';
+import { getFavorites } from '../../store/favorites-data/selectors.ts';
 
 function Favorites(): JSX.Element {
-  const favorites: OfferType[] = useAppSelector((state) => state.favorites);
+  const favorites: OfferType[] = useAppSelector(getFavorites);
   useEffect(() => {
     store.dispatch(fetchFavoritesAction());
   }, []);

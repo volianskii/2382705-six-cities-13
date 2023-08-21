@@ -1,8 +1,8 @@
-import {FormEvent, useRef} from 'react';
+import { FormEvent, useRef } from 'react';
 import Logo from '../../components/logo/logo.tsx';
-import {useAppDispatch} from '../../hooks/index.ts';
-import {AuthData} from '../../types/authorization.ts';
-import {loginAction} from '../../store/api-actions.ts';
+import { useAppDispatch } from '../../hooks/index.ts';
+import { AuthData } from '../../types/authorization.ts';
+import { loginAction } from '../../store/api-actions.ts';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { OfferType } from '../../types/offer.ts';
+import { memo } from 'react';
 
 type CardProps = {
   offer: OfferType;
@@ -49,5 +50,5 @@ function Card({offer, key, onMouseEnter, type}: CardProps): JSX.Element {
     </article>
   );
 }
-
-export default Card;
+const CardMemo = memo(Card);
+export default CardMemo;

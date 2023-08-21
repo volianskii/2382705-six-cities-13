@@ -1,4 +1,4 @@
-import type {Token} from '../types/authorization';
+import type { Token } from '../types/authorization';
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
 export const getToken = (): Token => {

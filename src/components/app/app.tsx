@@ -12,9 +12,12 @@ import HistoryRouter from '../history-route/history-route.tsx';
 import { useEffect } from 'react';
 import { store } from '../../store/index.ts';
 import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
+import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/selectors.ts';
+import ErrorPage from '../../pages/error-page/error-page.tsx';
 
 function App(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOffersDataLoading = useAppSelector(getLoadingStatus);
+  const hasError = useAppSelector(getErrorStatus);
   useEffect(() => {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());
@@ -23,6 +26,12 @@ function App(): JSX.Element {
   if (isOffersDataLoading) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (hasError) {
+    return (
+      <ErrorPage />
     );
   }
 
