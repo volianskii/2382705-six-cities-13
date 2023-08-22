@@ -4,8 +4,8 @@ import starButtonDetails from '../../constants/star-button-details';
 import { Data } from '../../types/comment.ts';
 import { addCommentAction } from '../../store/api-actions.ts';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
-import { getFormDisabledStatus } from '../../store/comments-data/selectors.ts';
-/* import { toast } from 'react-toastify'; */
+import { getCommentsError, getFormDisabledStatus } from '../../store/comments-data/selectors.ts';
+import { toast } from 'react-toastify';
 type CommentFormProps = {
   id: string | undefined;
 }
@@ -18,11 +18,15 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isFormDisabled = useAppSelector(getFormDisabledStatus);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-
+  const isCommentsError = useAppSelector(getCommentsError);
 
   const onSubmit = (data: Data) => {
     dispatch(addCommentAction(data));
   };
+
+  if (isCommentsError) {
+    toast.warn('An error occurred while trying to post a comment. Please try again.');
+  }
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -6,9 +6,11 @@ import { Comment } from '../../types/comment';
 const initialState: {
   offerComments: Comment[];
   isFormDisabled: boolean;
+  commentsError: boolean;
 } = {
   offerComments: [],
-  isFormDisabled: false
+  isFormDisabled: false,
+  commentsError: false
 };
 
 export const commentsData = createSlice({
@@ -29,6 +31,7 @@ export const commentsData = createSlice({
       })
       .addCase(addCommentAction.rejected, (state) => {
         state.isFormDisabled = false;
+        state.commentsError = true;
       });
   }
 });
