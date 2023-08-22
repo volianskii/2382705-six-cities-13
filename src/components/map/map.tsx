@@ -45,7 +45,7 @@ function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Eleme
           lng: offer.location.longitude,
         });
 
-        marker.setIcon(selectedOffer !== null && offer.title === selectedOffer.title ? currentCustomIcon : defaultCustomIcon)
+        marker.setIcon(selectedOffer !== null && offer.id === selectedOffer.id ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerLayer);
       });
 

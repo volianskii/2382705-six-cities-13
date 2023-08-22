@@ -8,11 +8,13 @@ const initialState: {
   isOffersDataLoading: boolean;
   city: string;
   hasError: boolean;
+  activeOfferId: string | null;
 } = {
   offers: [],
   isOffersDataLoading: false,
   city: 'Paris',
-  hasError: false
+  hasError: false,
+  activeOfferId: null
 };
 
 export const offersData = createSlice({
@@ -21,6 +23,9 @@ export const offersData = createSlice({
   reducers: {
     changeCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
+    },
+    setActiveOfferId(state, action: PayloadAction<string | null>) {
+      state.activeOfferId = action.payload;
     },
   },
   extraReducers(builder) {
@@ -40,4 +45,4 @@ export const offersData = createSlice({
   }
 });
 
-export const { changeCity } = offersData.actions;
+export const { changeCity, setActiveOfferId } = offersData.actions;

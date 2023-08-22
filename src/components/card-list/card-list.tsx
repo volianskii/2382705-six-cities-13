@@ -1,6 +1,8 @@
 import CardMemo from '../card/card';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { OfferType } from '../../types/offer.ts';
+import { useAppDispatch } from '../../hooks/index.ts';
+import { setActiveOfferId } from '../../store/offers-data/offers-data.ts';
 
 type CardListProps = {
   offers: OfferType[];
@@ -10,15 +12,17 @@ type CardListProps = {
 };
 
 function CardList({offers, listProp, typeProp, tabsProp}: CardListProps) {
-  const [, setActiveCard] = useState('first');
-
-  const mouseHandler = useCallback((hoverCardId: string): void => {
-    setActiveCard(hoverCardId);
-  }, []);
+  const dispatch = useAppDispatch();
+  const mouseEnterHandler = useCallback((hoverCardId: string): void => {
+    dispatch(setActiveOfferId(hoverCardId));
+  }, [dispatch]);
+  const mouseLeaveHandler = useCallback((): void => {
+    dispatch(setActiveOfferId(null));
+  }, [dispatch]);
 
   return (
     <div className={`${listProp} places__list ${tabsProp}`}>
-      {offers.map((offer) => <CardMemo offer={offer} key={offer.id} onMouseEnter={mouseHandler} type={typeProp} />)}
+      {offers.map((offer) => <CardMemo offer={offer} key={offer.id} onMouseLeave={mouseLeaveHandler} onMouseEnter={mouseEnterHandler} type={typeProp} />)}
     </div>
   );
 }

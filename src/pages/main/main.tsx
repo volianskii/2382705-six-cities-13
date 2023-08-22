@@ -5,7 +5,7 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import { useAppSelector } from '../../hooks/index.ts';
 import { OfferType } from '../../types/offer.ts';
-import { getActiveCity, getOffers } from '../../store/offers-data/selectors.ts';
+import { getActiveCity, getActiveOfferId, getOffers } from '../../store/offers-data/selectors.ts';
 import MainPageEmpty from '../../components/main-empty/main-empty.tsx';
 
 function MainPage(): JSX.Element {
@@ -14,8 +14,11 @@ function MainPage(): JSX.Element {
   const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
   const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
-  //для отображения кнопок избранного на карточках
-
+  const activeOfferId = useAppSelector(getActiveOfferId);
+  let activeOffer = null;
+  if (activeOfferId !== null) {
+    activeOffer = currentCityOfferList.filter((offer) => offer.id === activeOfferId)[0];
+  }
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -58,7 +61,7 @@ function MainPage(): JSX.Element {
                 <section className="cities__map map" style={{backgroundImage: 'none'}}>
                   <Map
                     city={currentCityData}
-                    offers={currentCityOfferList} selectedOffer={null} height={'814px'}
+                    offers={currentCityOfferList} selectedOffer={activeOffer} height={'814px'}
                     width={''}
                   />
                 </section>

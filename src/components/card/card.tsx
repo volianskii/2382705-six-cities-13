@@ -8,10 +8,11 @@ import { getFavorites } from '../../store/favorites-data/selectors.ts';
 type CardProps = {
   offer: OfferType;
   onMouseEnter: (hoverCardId: string) => void;
+  onMouseLeave: () => void;
   type: string;
 };
 
-function Card({offer, onMouseEnter, type}: CardProps): JSX.Element {
+function Card({offer, onMouseEnter, onMouseLeave, type}: CardProps): JSX.Element {
   const favorites = useAppSelector(getFavorites);
   let isActive = false;
   if (favorites.filter((item) => item.id === offer.id).length === 0) {
@@ -44,7 +45,7 @@ function Card({offer, onMouseEnter, type}: CardProps): JSX.Element {
   }
 
   return (
-    <article className={`${type}__card place-card`} onMouseEnter={() => onMouseEnter(offer.id)}>
+    <article className={`${type}__card place-card`} onMouseLeave={() => onMouseLeave()} onMouseEnter={() => onMouseEnter(offer.id)}>
       {offer.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
