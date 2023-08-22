@@ -7,7 +7,6 @@ import PrivateRoute from '../../components/private-route/private-route.tsx';
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
-import ErrorScreen from '../../pages/error-screen/error-screen.tsx';
 import browserHistory from '../../services/browser-history.ts';
 import HistoryRouter from '../history-route/history-route.tsx';
 import { useEffect } from 'react';
@@ -17,6 +16,7 @@ import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/select
 import { getAuthStatus } from '../../store/user-data/selectors.ts';
 import { AuthorizationStatus } from '../../types/authorization.ts';
 import { clearFavorites } from '../../store/favorites-data/favorites-data.ts';
+import ErrorPage from '../../pages/error-page/error-page.tsx';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
@@ -43,7 +43,7 @@ function App(): JSX.Element {
 
   if (hasError) {
     return (
-      <ErrorScreen />
+      <ErrorPage />
     );
   }
 

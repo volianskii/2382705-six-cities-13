@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../hooks/index';
 import { fetchOfferAction } from '../../store/api-actions';
-import './error-screen.css';
+import './error-page.css';
 
-function ErrorScreen(): JSX.Element {
+function ErrorPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const clickHandler = (): void => dispatch(fetchOfferAction());
 
@@ -14,4 +14,4 @@ function ErrorScreen(): JSX.Element {
   );
 }
 
-export default ErrorScreen;
+export default ErrorPage;
