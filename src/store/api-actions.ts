@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import type { State, AppDispatch } from '../types/state';
 import type { FullOfferType, OfferType } from '../types/offer';
-import type { Comment } from '../types/comment';
+import type { Comment, CommentData } from '../types/comment';
 import { APIRoute } from '../constants/api';
 import { redirectToRoute } from './action';
 import { AuthData, UserData } from '../types/authorization';
@@ -137,4 +137,17 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
   },
+);
+
+export const addCommentAction = createAsyncThunk<Comment, {commentData: CommentData; offerId: string}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'COMMENTS/addCommentAction',
+  async ({commentData, offerId}, {extra: api}) => {
+    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, commentData);
+
+    return data;
+  }
 );

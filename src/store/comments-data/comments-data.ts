@@ -1,12 +1,14 @@
 import { NameSpace } from '../../constants/store';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchOfferCommentsAction } from '../api-actions';
+import { addCommentAction, fetchOfferCommentsAction } from '../api-actions';
 import { Comment } from '../../types/comment';
 
 const initialState: {
   offerComments: Comment[];
+  isFormDisabled: boolean;
 } = {
-  offerComments: []
+  offerComments: [],
+  isFormDisabled: false
 };
 
 export const commentsData = createSlice({
@@ -17,6 +19,16 @@ export const commentsData = createSlice({
     builder
       .addCase(fetchOfferCommentsAction.fulfilled, (state, action) => {
         state.offerComments = action.payload;
+      })
+      .addCase(addCommentAction.fulfilled, (state, action) => {
+        state.offerComments.push(action.payload);
+        state.isFormDisabled = false;
+      })
+      .addCase(addCommentAction.pending, (state) => {
+        state.isFormDisabled = true;
+      })
+      .addCase(addCommentAction.rejected, (state) => {
+        state.isFormDisabled = false;
       });
   }
 });

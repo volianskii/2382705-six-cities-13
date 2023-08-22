@@ -17,6 +17,8 @@ import { getComments } from '../../store/comments-data/selectors.ts';
 import { getActiveCity } from '../../store/offers-data/selectors.ts';
 import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-button-big.tsx';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
+import { getAuthStatus } from '../../store/user-data/selectors.ts';
+import { AuthorizationStatus } from '../../types/authorization.ts';
 function Offer(): JSX.Element {
   const {id} = useParams();
   const currentOffer: FullOfferType | null = useAppSelector(getOffer);
@@ -31,6 +33,8 @@ function Offer(): JSX.Element {
   const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
   const favorites = useAppSelector(getFavorites);
+  const isAuth = useAppSelector(getAuthStatus);
+
   let isActive = false;
   if (favorites.filter((item) => item.id === currentOffer?.id).length === 0) {
     isActive = false;
@@ -158,7 +162,9 @@ function Offer(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{currentOfferComments.length}</span></h2>
                 <ReviewList comments={currentOfferComments} />
-                <CommentForm />
+                {isAuth === AuthorizationStatus.Auth ?
+                  <CommentForm id={id}/> :
+                  null}
               </section>
             </div>
           </div>
