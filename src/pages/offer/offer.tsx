@@ -19,6 +19,7 @@ import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-but
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
 import { getAuthStatus } from '../../store/user-data/selectors.ts';
 import { AuthorizationStatus } from '../../types/authorization.ts';
+import getRatingWidth from '../../utils/rating-width.ts';
 function Offer(): JSX.Element {
   const {id} = useParams();
   const currentOffer: FullOfferType | null = useAppSelector(getOffer);
@@ -41,30 +42,9 @@ function Offer(): JSX.Element {
   } else {
     isActive = true;
   }
-  let ratingWidth = '0%';
-  if (currentOffer !== null) {
-    const roundedRating = Math.round(currentOffer.rating);
-    switch (roundedRating) {
-      case 0:
-        ratingWidth = '0%';
-        break;
-      case 1:
-        ratingWidth = '20%';
-        break;
-      case 2:
-        ratingWidth = '40%';
-        break;
-      case 3:
-        ratingWidth = '60%';
-        break;
-      case 4:
-        ratingWidth = '80%';
-        break;
-      case 5:
-        ratingWidth = '100%';
-        break;
-    }
-  }
+
+  const ratingWidth = getRatingWidth(currentOffer?.rating);
+
 
   useEffect(() => {
     store.dispatch(fetchFullOfferAction(id));

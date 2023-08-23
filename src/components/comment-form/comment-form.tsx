@@ -1,11 +1,15 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
-import StarButton from '../star-button/star-button.tsx';
-import starButtonDetails from '../../constants/star-button-details';
-import { Data } from '../../types/comment.ts';
-import { addCommentAction } from '../../store/api-actions.ts';
-import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
-import { getCommentsError, getFormDisabledStatus } from '../../store/comments-data/selectors.ts';
 import { toast } from 'react-toastify';
+
+import StarButton from '../star-button/star-button.tsx';
+import STARBUTTONDETAILS from '../../constants/star-button-details';
+import { Data } from '../../types/comment.ts';
+
+import { addCommentAction } from '../../store/api-actions.ts';
+import { getCommentsError, getFormDisabledStatus } from '../../store/comments-data/selectors.ts';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
+
 type CommentFormProps = {
   id: string | undefined;
 }
@@ -16,10 +20,11 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
   const [error, setError] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
   const [isChecked, setChecked] = useState<boolean | undefined>(false);
-  const dispatch = useAppDispatch();
+
   const isFormDisabled = useAppSelector(getFormDisabledStatus);
-  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const isCommentsError = useAppSelector(getCommentsError);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: Data) => {
     dispatch(addCommentAction(data));
@@ -68,11 +73,12 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
       setDisabled(false);
     }
   }, [rating, comment]);
+
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {starButtonDetails.map((starButton) => <StarButton key={starButton.title} onChangeHandler={ratingChangeHandler} details={starButton} isChecked={isChecked}/>)}
+        {STARBUTTONDETAILS.map((starButton) => <StarButton key={starButton.title} onChangeHandler={ratingChangeHandler} details={starButton} isChecked={isChecked}/>)}
       </div>
       <textarea ref={textAreaRef} disabled={isFormDisabled} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={textareaChangeHandler}></textarea>
       {error ?

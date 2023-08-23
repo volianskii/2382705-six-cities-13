@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { OfferType } from '../../types/offer.ts';
 import { memo } from 'react';
-import BookmarkButtonSmall from '../bookmark-button-small/bookmark-button-small.tsx';
+
+import { OfferType } from '../../types/offer.ts';
+
 import { useAppSelector } from '../../hooks/index.ts';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
+import getRatingWidth from '../../utils/rating-width.ts';
+import BookmarkButtonSmall from '../bookmark-button-small/bookmark-button-small.tsx';
 
 type CardProps = {
   offer: OfferType;
@@ -20,29 +23,7 @@ function Card({offer, onMouseEnter, onMouseLeave, type}: CardProps): JSX.Element
   } else {
     isActive = true;
   }
-  const roundedRating = Math.round(offer.rating);
-  let ratingWidth = '0%';
-
-  switch (roundedRating) {
-    case 0:
-      ratingWidth = '0%';
-      break;
-    case 1:
-      ratingWidth = '20%';
-      break;
-    case 2:
-      ratingWidth = '40%';
-      break;
-    case 3:
-      ratingWidth = '60%';
-      break;
-    case 4:
-      ratingWidth = '80%';
-      break;
-    case 5:
-      ratingWidth = '100%';
-      break;
-  }
+  const ratingWidth = getRatingWidth(offer.rating);
 
   return (
     <article className={`${type}__card place-card`} onMouseLeave={() => onMouseLeave()} onMouseEnter={() => onMouseEnter(offer.id)}>

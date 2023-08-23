@@ -1,10 +1,12 @@
-import CardMemo from '../card/card';
 import { useCallback } from 'react';
-import { OfferType } from '../../types/offer.ts';
+
+import CardMemo from '../card/card';
 import { useAppDispatch } from '../../hooks/index.ts';
 import { setActiveOfferId } from '../../store/offers-data/offers-data.ts';
-import { SortingType } from '../../types/sorting.ts';
 import { sorting } from '../../utils/sorting.ts';
+
+import { OfferType } from '../../types/offer.ts';
+import { SortingType } from '../../types/sorting.ts';
 
 type CardListProps = {
   offers: OfferType[];

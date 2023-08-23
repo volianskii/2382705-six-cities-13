@@ -8,7 +8,7 @@ export type StarButtonDetailsType = {
 type StarButtonProps = {
   details: StarButtonDetailsType;
   onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-  isChecked: boolean;
+  isChecked: boolean | undefined;
 };
 
 function StarButton({details, onChangeHandler, isChecked}: StarButtonProps): JSX.Element {

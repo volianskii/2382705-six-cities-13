@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import type { State, AppDispatch } from '../types/state';
 import type { FullOfferType, OfferType } from '../types/offer';
 import type { Comment, CommentData } from '../types/comment';
-import { APIRoute } from '../constants/api';
+import { ApiRoute } from '../constants/api';
 import { redirectToRoute } from './action';
 import { AuthData, UserData } from '../types/authorization';
 import { dropToken, saveToken } from '../services/token';
@@ -15,7 +15,7 @@ export const fetchOfferAction = createAsyncThunk<OfferType[], undefined, {
 }>(
   'OFFERS/fetchOffers',
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<OfferType[]>(APIRoute.Offers);
+    const {data} = await api.get<OfferType[]>(ApiRoute.Offers);
 
     return data;
   }
@@ -28,7 +28,7 @@ export const fetchFullOfferAction = createAsyncThunk<FullOfferType, undefined, {
 }>(
   'OFFER/fetchFullOffer',
   async (offerId: string, {extra: api}) => {
-    const {data} = await api.get<FullOfferType>(`${APIRoute.Offers}/${offerId}`);
+    const {data} = await api.get<FullOfferType>(`${ApiRoute.Offers}/${offerId}`);
 
     return data;
   }
@@ -41,7 +41,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<OfferType[], undefined, 
 }>(
   'NEARBYOFFERS/fetchNearbyOffers',
   async (offerId: string, {extra: api}) => {
-    const {data} = await api.get<OfferType[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+    const {data} = await api.get<OfferType[]>(`${ApiRoute.Offers}/${offerId}/nearby`);
 
     return data;
   }
@@ -54,7 +54,7 @@ export const fetchOfferCommentsAction = createAsyncThunk<Comment[], undefined, {
 }>(
   'COMMENTS/fetchOfferComments',
   async (offerId: string, {extra: api}) => {
-    const {data} = await api.get<Comment[]>(`${APIRoute.Comments}/${offerId}`);
+    const {data} = await api.get<Comment[]>(`${ApiRoute.Comments}/${offerId}`);
 
     return data;
   }
@@ -67,7 +67,7 @@ export const fetchFavoritesAction = createAsyncThunk<OfferType[], undefined, {
 }>(
   'FAVORITES/fetchFavorites',
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<OfferType[]>(APIRoute.Favorites);
+    const {data} = await api.get<OfferType[]>(ApiRoute.Favorites);
 
     return data;
   }
@@ -80,7 +80,7 @@ export const addFavoritesAction = createAsyncThunk<FullOfferType, string | undef
 }>(
   'FAVORITES/addFavorites',
   async (id: string, {extra: api}) => {
-    const {data} = await api.post<FullOfferType>(`${APIRoute.Favorites}/${id}/1`);
+    const {data} = await api.post<FullOfferType>(`${ApiRoute.Favorites}/${id}/1`);
 
     return data;
   }
@@ -93,7 +93,7 @@ export const deleteFavoritesAction = createAsyncThunk<FullOfferType, string | un
 }>(
   'FAVORITES/deleteFavorites',
   async (id: string, {extra: api}) => {
-    const {data} = await api.post<FullOfferType>(`${APIRoute.Favorites}/${id}/0`);
+    const {data} = await api.post<FullOfferType>(`${ApiRoute.Favorites}/${id}/0`);
 
     return data;
   }
@@ -106,7 +106,7 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, {
 }>(
   'USER/checkAuth',
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<UserData>(APIRoute.Login);
+    const {data} = await api.get<UserData>(ApiRoute.Login);
 
     return data;
   }
@@ -119,7 +119,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
 }>(
   'USER/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    const {data} = await api.post<UserData>(ApiRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(redirectToRoute('/'));
 
@@ -134,7 +134,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'USER/logout',
   async (_arg, {extra: api}) => {
-    await api.delete(APIRoute.Logout);
+    await api.delete(ApiRoute.Logout);
     dropToken();
   },
 );
@@ -146,7 +146,7 @@ export const addCommentAction = createAsyncThunk<Comment, {commentData: CommentD
 }>(
   'COMMENTS/addCommentAction',
   async ({commentData, offerId}, {extra: api}) => {
-    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, commentData);
+    const {data} = await api.post<Comment>(`${ApiRoute.Comments}/${offerId}`, commentData);
 
     return data;
   }

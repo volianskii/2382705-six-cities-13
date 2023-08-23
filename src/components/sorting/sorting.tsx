@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { SortingMap } from '../../constants/sorting';
+import { SORTINGMAP } from '../../constants/sorting';
 import type { SortingType } from '../../types/sorting';
 import { useState } from 'react';
 
@@ -35,7 +35,7 @@ function Sorting({activeSorting, onChange}: SortingProps) {
     <form className="places__sorting" action="#" method="get" onKeyDown={handleKeydown}>
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleTypeClick}>
-        {SortingMap[activeSorting]}
+        {SORTINGMAP[activeSorting]}
         <svg className="places__sorting-arrow" width="7" height="4" style={iconStyle}>
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -45,9 +45,9 @@ function Sorting({activeSorting, onChange}: SortingProps) {
       })}
       >
         {(
-          Object.entries(SortingMap) as [
+          Object.entries(SORTINGMAP) as [
             SortingType,
-            (typeof SortingMap) [SortingType]
+            (typeof SORTINGMAP) [SortingType]
           ] []
         ).map(([type, label]) => (
           <li key={type} className={classNames('places__option', {

@@ -6,6 +6,7 @@ import Header from '../../components/header/header.tsx';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty.tsx';
 import BookmarkButtonSmall from '../../components/bookmark-button-small/bookmark-button-small.tsx';
+import getRatingWidth from '../../utils/rating-width.ts';
 
 function Favorites(): JSX.Element {
   const favorites: OfferType[] = useAppSelector(getFavorites);
@@ -44,6 +45,7 @@ function Favorites(): JSX.Element {
                         {favorites.map((favorite, favoriteId) => {
                           if (favorite.city.name === favoriteCityName) {
                             const keyNewValue = `${favoriteId}-favorite`;
+                            const ratingWidth = getRatingWidth(favorite.rating);
                             return (
                               <article className="favorites__card place-card" key={keyNewValue}>
                                 {favorite.isPremium &&
@@ -65,7 +67,7 @@ function Favorites(): JSX.Element {
                                   </div>
                                   <div className="place-card__rating rating">
                                     <div className="place-card__stars rating__stars">
-                                      <span style={{width: '100%'}}></span>
+                                      <span style={{width: ratingWidth}}></span>
                                       <span className="visually-hidden">Rating</span>
                                     </div>
                                   </div>

@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthStatus } from '../../store/user-data/selectors';
 import classNames from 'classnames';
-import { AuthorizationStatus } from '../../types/authorization';
+
+import { getAuthStatus } from '../../store/user-data/selectors';
 import { addFavoritesAction, deleteFavoritesAction } from '../../store/api-actions';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../types/authorization';
 
 type BookmarkButtonProps = {
   id?: string;
