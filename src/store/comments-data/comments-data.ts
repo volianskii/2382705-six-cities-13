@@ -25,6 +25,7 @@ export const commentsData = createSlice({
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.offerComments.push(action.payload);
         state.isFormDisabled = false;
+        state.commentsError = false;
       })
       .addCase(addCommentAction.pending, (state) => {
         state.isFormDisabled = true;

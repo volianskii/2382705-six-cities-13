@@ -1,14 +1,19 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import Logo from '../../components/logo/logo.tsx';
-import { useAppDispatch } from '../../hooks/index.ts';
-import { AuthData } from '../../types/authorization.ts';
-import { loginAction } from '../../store/api-actions.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
+import { AuthData, AuthorizationStatus } from '../../types/authorization.ts';
+import { checkAuthAction, loginAction } from '../../store/api-actions.ts';
+import { getAuthStatus } from '../../store/user-data/selectors.ts';
+import { useNavigate } from 'react-router-dom';
+import { store } from '../../store/index.ts';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const isAuth = useAppSelector(getAuthStatus);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
   };
@@ -23,6 +28,13 @@ function Login(): JSX.Element {
       });
     }
   };
+
+  useEffect(() => {
+    store.dispatch(checkAuthAction());
+    if (isAuth === AuthorizationStatus.Auth) {
+      navigate('/');
+    }
+  });
 
   return (
     <div className="page page--gray page--login">

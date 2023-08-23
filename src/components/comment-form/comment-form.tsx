@@ -25,10 +25,6 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
     dispatch(addCommentAction(data));
   };
 
-  if (isCommentsError) {
-    toast.warn('An error occurred while trying to post a comment. Please try again.');
-  }
-
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (id) {
@@ -44,6 +40,11 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
       textAreaRef.current.value = '';
       setChecked(false);
       setDisabled(true);
+    }
+    if (isCommentsError) {
+      toast.warn('An error occurred while trying to post a comment. Please try again.', {
+        autoClose: 1500
+      });
     }
   };
 
