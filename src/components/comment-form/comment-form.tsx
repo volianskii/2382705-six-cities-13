@@ -15,6 +15,7 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
   const [rating, setRating] = useState('0');
   const [error, setError] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
+  const [isChecked, setChecked] = useState<boolean | undefined>(false);
   const dispatch = useAppDispatch();
   const isFormDisabled = useAppSelector(getFormDisabledStatus);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -38,12 +39,17 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
         },
         offerId: id,
       });
+      setComment('null');
+      setRating('0');
       textAreaRef.current.value = '';
+      setChecked(false);
+      setDisabled(true);
     }
   };
 
   const ratingChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setRating(event.target.value);
+    setChecked(undefined);
   };
 
   const textareaChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -65,7 +71,7 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
     <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {starButtonDetails.map((starButton) => <StarButton key={starButton.title} onChangeHandler={ratingChangeHandler} details={starButton}/>)}
+        {starButtonDetails.map((starButton) => <StarButton key={starButton.title} onChangeHandler={ratingChangeHandler} details={starButton} isChecked={isChecked}/>)}
       </div>
       <textarea ref={textAreaRef} disabled={isFormDisabled} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={textareaChangeHandler}></textarea>
       {error ?
