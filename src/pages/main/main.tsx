@@ -1,24 +1,29 @@
+import { useState } from 'react';
 import CardList from '../../components/card-list/card-list.tsx';
-import { CITIES } from '../../constants/city.ts';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
-import { useAppSelector } from '../../hooks/index.ts';
-import { OfferType } from '../../types/offer.ts';
-import { getActiveCity, getActiveOfferId, getOffers } from '../../store/offers-data/selectors.ts';
-import MainPageEmpty from '../../components/main-empty/main-empty.tsx';
 import Sorting from '../../components/sorting/sorting.tsx';
-import { useState } from 'react';
+import MainPageEmpty from '../../components/main-empty/main-empty.tsx';
+
 import { SortingType } from '../../types/sorting.ts';
+import { OfferType } from '../../types/offer.ts';
+
+import { CITIES } from '../../constants/city.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import { getActiveCity, getActiveOfferId, getOffers } from '../../store/offers-data/selectors.ts';
 
 function MainPage(): JSX.Element {
 
   const currentOfferList = useAppSelector(getOffers);
   const currentCity = useAppSelector(getActiveCity);
+  const activeOfferId = useAppSelector(getActiveOfferId);
+
+  const [activeSorting, setActiveSorting] = useState<SortingType>('Popular');
+
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
   const currentCityOfferList: OfferType[] = currentOfferList.filter((offer) => offer.city.name === currentCity);
-  const activeOfferId = useAppSelector(getActiveOfferId);
-  const [activeSorting, setActiveSorting] = useState<SortingType>('Popular');
+
   let activeOffer = null;
   if (activeOfferId !== null) {
     activeOffer = currentCityOfferList.filter((offer) => offer.id === activeOfferId)[0];

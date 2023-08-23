@@ -1,5 +1,6 @@
-import { NameSpace } from '../../constants/store';
 import { createSlice } from '@reduxjs/toolkit';
+
+import { NameSpace } from '../../constants/store';
 import { addCommentAction, fetchOfferCommentsAction } from '../api-actions';
 import { Comment } from '../../types/comment';
 

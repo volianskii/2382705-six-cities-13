@@ -1,5 +1,6 @@
 import { GridLoader } from 'react-spinners';
 import { Colors } from '../../constants/colors.ts';
+
 import './loading-screen.css';
 
 function LoadingScreen(): JSX.Element {

@@ -1,5 +1,6 @@
-import { NameSpace } from '../../constants/store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { NameSpace } from '../../constants/store';
 import { fetchOfferAction } from '../api-actions';
 import { OfferType } from '../../types/offer';
 

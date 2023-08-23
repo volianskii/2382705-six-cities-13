@@ -1,40 +1,47 @@
-import CommentForm from '../../components/comment-form/comment-form.tsx';
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { CombinedOfferType, FullOfferType, OfferType } from '../../types/offer.ts';
+import { useParams } from 'react-router-dom';
+
+import CommentForm from '../../components/comment-form/comment-form.tsx';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
-import { CITIES } from '../../constants/city.ts';
-import { useAppSelector } from '../../hooks/index.ts';
 import CardList from '../../components/card-list/card-list.tsx';
+import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-button-big.tsx';
+import Header from '../../components/header/header.tsx';
+
+import { CombinedOfferType, FullOfferType, OfferType } from '../../types/offer.ts';
+import { Comment } from '../../types/comment.ts';
+import { AuthorizationStatus } from '../../types/authorization.ts';
+
 import { store } from '../../store/index.ts';
 import { fetchFullOfferAction, fetchNearbyOffersAction, fetchOfferCommentsAction } from '../../store/api-actions.ts';
-import { Comment } from '../../types/comment.ts';
-import Header from '../../components/header/header.tsx';
 import { getOffer } from '../../store/offer-data/selectors.ts';
 import { getNearbyOffers } from '../../store/nearby-data/selectors.ts';
 import { getComments } from '../../store/comments-data/selectors.ts';
 import { getActiveCity } from '../../store/offers-data/selectors.ts';
-import BookmarkButtonBig from '../../components/bookmark-button-big/bookmark-button-big.tsx';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
 import { getAuthStatus } from '../../store/user-data/selectors.ts';
-import { AuthorizationStatus } from '../../types/authorization.ts';
+
 import getRatingWidth from '../../utils/rating-width.ts';
+import { CITIES } from '../../constants/city.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+
 function Offer(): JSX.Element {
   const {id} = useParams();
+
   const currentOffer: FullOfferType | null = useAppSelector(getOffer);
   const nearbyOffers: OfferType[] = useAppSelector(getNearbyOffers);
+  const currentOfferComments: Comment[] = useAppSelector(getComments);
+  const favorites = useAppSelector(getFavorites);
+  const currentCity = useAppSelector(getActiveCity);
+  const isAuth = useAppSelector(getAuthStatus);
+
   const nearbyUniqueOffers: OfferType[] = nearbyOffers.filter((offer) => offer.title !== currentOffer?.title);
   const nearbySomeOffers = nearbyUniqueOffers.slice(0, 3);
   const nearbyMapOffers: CombinedOfferType[] = nearbyUniqueOffers.slice(0, 3);
   if (currentOffer) {
     nearbyMapOffers.push(currentOffer);
   }
-  const currentOfferComments: Comment[] = useAppSelector(getComments);
-  const currentCity = useAppSelector(getActiveCity);
   const currentCityData = CITIES.filter((city) => city.name === currentCity)[0];
-  const favorites = useAppSelector(getFavorites);
-  const isAuth = useAppSelector(getAuthStatus);
 
   let isActive = false;
   if (favorites.filter((item) => item.id === currentOffer?.id).length === 0) {

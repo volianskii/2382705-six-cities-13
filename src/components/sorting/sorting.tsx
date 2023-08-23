@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import classNames from 'classnames';
+
 import { SORTINGMAP } from '../../constants/sorting';
 import type { SortingType } from '../../types/sorting';
-import { useState } from 'react';
 
 type SortingProps = {
   activeSorting: SortingType;

@@ -1,24 +1,29 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
-import { fetchFavoritesAction } from '../../store/api-actions.ts';
-import { OfferType } from '../../types/offer.ts';
-import Header from '../../components/header/header.tsx';
+
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
+import { fetchFavoritesAction } from '../../store/api-actions.ts';
+
+import Header from '../../components/header/header.tsx';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty.tsx';
 import BookmarkButtonSmall from '../../components/bookmark-button-small/bookmark-button-small.tsx';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
+import { OfferType } from '../../types/offer.ts';
 import getRatingWidth from '../../utils/rating-width.ts';
 
 function Favorites(): JSX.Element {
   const favorites: OfferType[] = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  });
+
   const favoritesList: OfferType['city']['name'][] = [];
   favorites.map((favorite) => {
     if (!favoritesList.includes(favorite.city.name)) {
       favoritesList.push(favorite.city.name);
     }
+  });
+
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
   });
 
   return (

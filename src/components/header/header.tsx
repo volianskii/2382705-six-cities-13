@@ -1,17 +1,22 @@
-import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../store/api-actions.ts';
-import { useAppSelector } from '../../hooks/index.ts';
 import { useDispatch } from 'react-redux';
+
+import Logo from '../logo/logo';
+
+import { logoutAction } from '../../store/api-actions.ts';
 import { getAuthStatus, getUserInfo } from '../../store/user-data/selectors';
-import { AuthorizationStatus } from '../../types/authorization.ts';
 import { getFavorites } from '../../store/favorites-data/selectors.ts';
+
+import { useAppSelector } from '../../hooks/index.ts';
+import { AuthorizationStatus } from '../../types/authorization.ts';
 
 function Header(): JSX.Element {
   const isAuth = useAppSelector(getAuthStatus);
   const user = useAppSelector(getUserInfo);
   const favorites = useAppSelector(getFavorites);
+
   const dispatch = useDispatch();
+
   const signOutClickHandler = () => {
     dispatch(logoutAction());
   };
