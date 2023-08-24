@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import style from './style.module.css';
+import './page404.css';
 
 function Page404(): JSX.Element {
   return (
-    <div className={style.body}>
-      <div className={style.form}>
+    <div className='body'>
+      <div className='form'>
         <h1>404</h1>
         <p>page not found</p>
         <form>
