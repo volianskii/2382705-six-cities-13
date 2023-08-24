@@ -1,5 +1,6 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map, TileLayer } from 'leaflet';
+
 import type { City } from '../constants/city.ts';
 import { URL_MAP_LAYER, URL_MAP_ATTRIBUTION } from '../constants/map-url.ts';
 

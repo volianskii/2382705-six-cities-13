@@ -1,6 +1,7 @@
+import './error-page.css';
+
 import { useAppDispatch } from '../../hooks/index';
 import { fetchOfferAction } from '../../store/api-actions';
-import './error-page.css';
 
 function ErrorPage(): JSX.Element {
   const dispatch = useAppDispatch();

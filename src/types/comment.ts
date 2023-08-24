@@ -7,3 +7,13 @@ export type Comment = {
   comment: string;
   rating: number;
 };
+
+export type CommentData = {
+  comment: string;
+  rating: number;
+};
+
+export type Data = {
+  commentData: CommentData;
+  offerId: string;
+};

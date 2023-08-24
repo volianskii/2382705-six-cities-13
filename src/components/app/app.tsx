@@ -1,27 +1,43 @@
+import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import MainPage from '../../pages/main/main.tsx';
 import Favorites from '../../pages/favorites/favorites.tsx';
 import Login from '../../pages/login/login.tsx';
 import Offer from '../../pages/offer/offer.tsx';
 import Page404 from '../../pages/page404/page404.tsx';
-import PrivateRoute from '../../components/private-route/private-route.tsx';
-import { Routes, Route } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/index.ts';
+import ErrorPage from '../../pages/error-page/error-page.tsx';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
+
+import { useAppSelector } from '../../hooks/index.ts';
 import browserHistory from '../../services/browser-history.ts';
 import HistoryRouter from '../history-route/history-route.tsx';
-import { useEffect } from 'react';
+import PrivateRoute from '../../components/private-route/private-route.tsx';
+
 import { store } from '../../store/index.ts';
-import { fetchOfferAction, checkAuthAction } from '../../store/api-actions.ts';
+import { fetchOfferAction, checkAuthAction, fetchFavoritesAction } from '../../store/api-actions.ts';
 import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/selectors.ts';
-import ErrorPage from '../../pages/error-page/error-page.tsx';
+import { getAuthStatus } from '../../store/user-data/selectors.ts';
+import { AuthorizationStatus } from '../../types/authorization.ts';
+import { clearFavorites } from '../../store/favorites-data/favorites-data.ts';
+
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
+  const isAuth = useAppSelector(getAuthStatus);
+
   useEffect(() => {
     store.dispatch(fetchOfferAction());
     store.dispatch(checkAuthAction());
   }, []);
+  useEffect(() => {
+    if (isAuth === AuthorizationStatus.Auth) {
+      store.dispatch(fetchFavoritesAction());
+    } else {
+      store.dispatch(clearFavorites());
+    }
+  }, [isAuth]);
 
   if (isOffersDataLoading) {
     return (
@@ -43,7 +59,7 @@ function App(): JSX.Element {
         <Route
           path='/favorites'
           element={
-            <PrivateRoute>
+            <PrivateRoute isAuth={isAuth}>
               <Favorites />
             </PrivateRoute>
           }

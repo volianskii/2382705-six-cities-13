@@ -1,15 +1,18 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../constants/marker-url';
-import useMap from '../../hooks/use-map';
-import type { City } from '../../constants/city.ts';
-import { OfferType } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
+
+import type { City } from '../../constants/city.ts';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../constants/marker-url';
+
+import useMap from '../../hooks/use-map';
+import { CombinedOfferType, FullOfferType, OfferType } from '../../types/offer';
+
 
 type MapProps ={
   city: City;
-  offers: OfferType[];
-  selectedOffer: OfferType | null;
+  offers: CombinedOfferType[];
+  selectedOffer: OfferType | null | FullOfferType;
   height: string | number | undefined;
   width: string | undefined;
 }
@@ -45,7 +48,7 @@ function Map ({city, offers, selectedOffer, height, width}: MapProps): JSX.Eleme
           lng: offer.location.longitude,
         });
 
-        marker.setIcon(selectedOffer !== null && offer.title === selectedOffer.title ? currentCustomIcon : defaultCustomIcon)
+        marker.setIcon(selectedOffer !== null && offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerLayer);
       });
 
