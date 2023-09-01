@@ -43,10 +43,10 @@ function Offer(): JSX.Element {
   const [isActive, setIsActive] = useState(false);
 
   const nearbyUniqueOffers: OfferType[] = nearbyOffers.filter((offer) => offer.title !== currentOffer?.title);
-  const NEARBYMAXAMOUNT = 3;
-  const MAXIMAGESAMOUNT = 6;
-  const nearbySomeOffers = nearbyUniqueOffers.slice(0, NEARBYMAXAMOUNT);
-  const nearbyMapOffers: CombinedOfferType[] = nearbyUniqueOffers.slice(0, NEARBYMAXAMOUNT);
+  const NEARBY_MAX_AMOUNT = 3;
+  const MAX_IMAGES_AMOUNT = 6;
+  const nearbySomeOffers = nearbyUniqueOffers.slice(0, NEARBY_MAX_AMOUNT);
+  const nearbyMapOffers: CombinedOfferType[] = nearbyUniqueOffers.slice(0, NEARBY_MAX_AMOUNT);
   if (currentOffer) {
     nearbyMapOffers.push(currentOffer);
   }
@@ -97,7 +97,7 @@ function Offer(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer?.images.slice(0, MAXIMAGESAMOUNT).map((image, imageId) => {
+              {currentOffer?.images.slice(0, MAX_IMAGES_AMOUNT).map((image, imageId) => {
                 const keyValue = `${imageId}-image`;
                 return (
                   <div className="offer__image-wrapper" key={keyValue}>
