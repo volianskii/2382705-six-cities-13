@@ -11,11 +11,11 @@ const MAX_COMMENTS_AMOUNT = 10;
 const ReviewList = ({comments}: ReviewListProps): JSX.Element => {
   const newComments = sortComments(comments).slice(0, MAX_COMMENTS_AMOUNT);
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid='reviews-container'>
       {newComments.map((comment, commentId) => {
         const keyValue = `${commentId}-review`;
         return (
-          <Review key={keyValue} comment={comment} />
+          <Review key={keyValue} comment={comment} data-testid='review-container'/>
         );
       })}
     </ul>

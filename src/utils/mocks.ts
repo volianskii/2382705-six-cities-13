@@ -1,8 +1,14 @@
 import { FullOfferType, OfferType } from '../types/offer';
-import { Comment } from '../types/comment';
+import { Comment, CommentData } from '../types/comment';
 
 import { random, datatype, date, address, system, internet } from 'faker';
 import { UserData } from '../types/authorization';
+import { createAPI } from '../services/api';
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+import { State } from '../types/state';
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+export const extractActionTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
 export const makeFakeOffer = (): OfferType => ({
   id: random.alpha(),
@@ -82,4 +88,12 @@ export const makeFakeUser = (): UserData => ({
   isPro: datatype.boolean(),
   email: internet.email(),
   token:random.alpha()
+});
+
+export const makeFakeCommentData = (): CommentData => ({
+  comment: random.alpha(),
+  rating: datatype.number({
+    'min': 0,
+    'max': 5
+  })
 });
