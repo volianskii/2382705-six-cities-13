@@ -68,7 +68,7 @@ function Map({city, offers, selectedOffer, height, width}: MapProps): JSX.Elemen
   }, [map, offers, selectedOffer, city]);
 
   return (
-    <div style={{height: height, minHeight: '500px', width: width, maxWidth: '1144px', margin: '0 auto'}} ref={mapRef}></div>
+    <div style={{height: height, minHeight: '500px', width: width, maxWidth: '1144px', margin: '0 auto'}} ref={mapRef} data-testid='mapElement'></div>
   );
 }
 

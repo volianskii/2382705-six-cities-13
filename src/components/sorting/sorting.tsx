@@ -35,7 +35,7 @@ function Sorting({activeSorting, onChange}: SortingProps) {
   return (
     <form className="places__sorting" action="#" method="get" onKeyDown={handleKeydown}>
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleTypeClick}>
+      <span className="places__sorting-type" tabIndex={0} onClick={handleTypeClick} data-testid='activeSortingElement'>
         {SortingMap[activeSorting]}
         <svg className="places__sorting-arrow" width="7" height="4" style={iconStyle}>
           <use xlinkHref="#icon-arrow-select"></use>
@@ -44,6 +44,7 @@ function Sorting({activeSorting, onChange}: SortingProps) {
       <ul className={classNames('places__options', 'places__options--custom', {
         'places__options--opened': isOpened,
       })}
+      data-testid='sortingListElement'
       >
         {(
           Object.entries(SortingMap) as [

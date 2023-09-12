@@ -43,7 +43,7 @@ function Favorites(): JSX.Element {
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
             <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
+              <h1 className="favorites__title" data-testid='favoritesPage'>Saved listing</h1>
               <ul className="favorites__list">
                 {Object.keys(favoritesList).map((favoriteCityName, favoriteCityId) => {
                   const keyValue = `${favoriteCityId}-favoriteCity`;
@@ -66,7 +66,7 @@ function Favorites(): JSX.Element {
                               actualType = 'Private Room';
                             }
                             return (
-                              <article className="favorites__card place-card" key={keyNewValue}>
+                              <article className="favorites__card place-card" key={keyNewValue} data-testid='favoritesCardElement'>
                                 {favorite.isPremium &&
                                   <div className="place-card__mark">
                                     <span>Premium</span>

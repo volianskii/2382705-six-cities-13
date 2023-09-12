@@ -10,8 +10,6 @@ import ErrorPage from '../../pages/error-page/error-page.tsx';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 
 import { useAppSelector } from '../../hooks/index.ts';
-import browserHistory from '../../services/browser-history.ts';
-import HistoryRouter from '../history-route/history-route.tsx';
 import PrivateRoute from '../../components/private-route/private-route.tsx';
 
 import { store } from '../../store/index.ts';
@@ -20,7 +18,6 @@ import { getErrorStatus, getLoadingStatus } from '../../store/offers-data/select
 import { getAuthStatus } from '../../store/user-data/selectors.ts';
 import { AuthorizationStatus } from '../../types/authorization.ts';
 import { clearFavorites } from '../../store/favorites-data/favorites-data.ts';
-
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getLoadingStatus);
@@ -52,22 +49,20 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/login' element={<Login />} />
-        <Route
-          path='/favorites'
-          element={
-            <PrivateRoute isAuth={isAuth}>
-              <Favorites />
-            </PrivateRoute>
-          }
-        />
-        <Route path='/offer/:id' element={<Offer />} />
-        <Route path='*' element={<Page404 />} />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route path='/' element={<MainPage />} />
+      <Route path='/login' element={<Login />} />
+      <Route
+        path='/favorites'
+        element={
+          <PrivateRoute isAuth={isAuth}>
+            <Favorites />
+          </PrivateRoute>
+        }
+      />
+      <Route path='/offer/:id' element={<Offer />} />
+      <Route path='*' element={<Page404 />} />
+    </Routes>
   );
 }
 

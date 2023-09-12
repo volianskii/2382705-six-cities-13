@@ -33,7 +33,7 @@ function Card({offer, onMouseEnter, onMouseLeave, type}: CardProps): JSX.Element
     }
   }, [favorites, offer.id]);
   return (
-    <article className={`${type}__card place-card`} onMouseLeave={() => onMouseLeave()} onMouseEnter={() => onMouseEnter(offer.id)}>
+    <article className={`${type}__card place-card`} onMouseLeave={() => onMouseLeave()} onMouseEnter={() => onMouseEnter(offer.id)} data-testid='cardComponent'>
       {offer.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

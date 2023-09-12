@@ -15,7 +15,7 @@ function CitiesList(): JSX.Element {
   };
 
   return (
-    <ul className="locations__list tabs__list">
+    <ul className="locations__list tabs__list" data-testid='citiesListComponent'>
       {CITIES.map((city, id) => {
         const keyValue = `${id}-city`;
         return (

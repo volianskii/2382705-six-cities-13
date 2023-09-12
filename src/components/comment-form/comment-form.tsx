@@ -81,14 +81,14 @@ function CommentForm({id}: CommentFormProps): JSX.Element {
   }, [isCommentsError, isResponseGot]);
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler} data-testid='commentComponent'>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {StarButtonDetails.map((starButton) => <StarButton key={starButton.title} isFormDisabled = {isFormDisabled} onChangeHandler={ratingChangeHandler} details={starButton} isChecked={isChecked}/>)}
       </div>
-      <textarea ref={textAreaRef} disabled={isFormDisabled} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={textareaChangeHandler}></textarea>
+      <textarea ref={textAreaRef} disabled={isFormDisabled} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={textareaChangeHandler} data-testid='textareaElement'></textarea>
       {error ?
-        <p style={{fontSize: '10px', color: 'red', margin: '0'}}>The length of the comment must be at least {CommentLength.Min} and a maximum of {CommentLength.Max} characters</p> :
+        <p style={{fontSize: '10px', color: 'red', margin: '0'}} data-testid='warningMessage'>The length of the comment must be at least {CommentLength.Min} and a maximum of {CommentLength.Max} characters</p> :
         null}
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

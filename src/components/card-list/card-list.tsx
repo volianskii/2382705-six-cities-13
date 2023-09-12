@@ -27,10 +27,10 @@ function CardList({offers, listProp, typeProp, tabsProp, activeSorting}: CardLis
 
   return (
     activeSorting ?
-      <div className={`${listProp} places__list ${tabsProp}`}>
+      <div className={`${listProp} places__list ${tabsProp}`} data-testid='cardListComponent'>
         {sorting[activeSorting](offers).map((offer) => <CardMemo offer={offer} key={offer.id} onMouseLeave={mouseLeaveHandler} onMouseEnter={mouseEnterHandler} type={typeProp} />)}
       </div> :
-      <div className={`${listProp} places__list ${tabsProp}`}>
+      <div className={`${listProp} places__list ${tabsProp}`} data-testid='cardListComponent'>
         {offers.map((offer) => <CardMemo offer={offer} key={offer.id} onMouseLeave={mouseLeaveHandler} onMouseEnter={mouseEnterHandler} type={typeProp} />)}
       </div>
   );

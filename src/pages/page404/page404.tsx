@@ -5,11 +5,11 @@ function Page404(): JSX.Element {
   return (
     <div className='page-404-body'>
       <div className='page-404-form'>
-        <h1>404</h1>
+        <h1 data-testid='page404'>404</h1>
         <p>page not found</p>
         <form>
-          <Link to='/'>
-            <button>
+          <Link to='/' >
+            <button data-testid='button'>
               To Main Page
             </button>
           </Link>

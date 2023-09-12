@@ -1,49 +1,31 @@
-# Личный проект «Шесть городов»
+Six Cities
 
-- Студент: [Волянский Дмитрий](https://up.htmlacademy.ru/react/13/user/2382705).
-- Наставник: Ярослав Силкин.
+Six Cities is an application (service) for finding rental offers.
+User can choose from 6 cities: Paris, Cologne, Brussels, Amsterdam, Hamburg and Dusseldorf. User can see the current list of rental offers in each city. The application uses a map that displays markers of rental offers in the selected city, as well as a marker of an active offer. Clicking on the rental offer card navigates user to the page with full information on this offer.
+Authorization is implemented in the application. Authorized users can save rental offers to favorites and leave booking reviews.
+The application has a page and an action available only for authorized users. Trying to access them while being an unauthorized user results in being redirected to authorization form.
+Accessing a non-existent page (for example, through the address bar) is handled correctly by routing.
 
----
+Technologies used in the project:
+-TypeScript;
+-React;
+-Redux Toolkit;
+-HTML5;
+-CSS;
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`._
+The project is covered with tests.
 
----
+Six Cities - это приложение (сервис) для поиска жилья. На выбор пользователя предоставляется 6 городов: Paris, Cologne, Brussels, Amsterdam, Hamburg and Dusseldorf.
+Пользователь может изучить актуальный список предложений по аренде в каждом городе. Приложение использует карту, на которой отображаются маркеры предложений по аренде в выбранном городе, а также маркер активного предложения. Клик по карточке предложения по аренде перенаправляет пользователя на страницу с полной информацией по данному предложению.
+В приложении реализована авторизация. Авторизованные пользователи могут сохранять предложения по аренде в избранное и оставлять отзывы о бронировании.
+В приложении есть страница и действие, доступные только для авторизованных пользователей. Попытка получить к ним доступ в качестве неавторизованного пользователя приводит к перенаправлению на форму авторизации.
+Обращение к несуществующей странице (например, через адресную строку) корректно обрабатывается маршрутизацией.
 
-### Памятка
+Технологии, применяемые в проекте:
+-TypeScript;
+-React;
+-Redux Toolkit;
+-HTML5;
+-CSS;
 
-#### 1. Зарегистрируйтесь на Гитхабе
-
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
-
-#### 2. Создайте форк
-
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
-
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
-
-Получится вот так:
-
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
-```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
-
----
-
-<a href="https://htmlacademy.ru/intensive/react"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/react/logo-for-github.png"></a>
-
-Репозиторий создан для обучения на профессиональном онлайн‑курсе «[React. Разработка сложных клиентских приложений](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru).
+Проект покрыт тестами.

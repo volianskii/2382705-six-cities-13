@@ -44,10 +44,10 @@ function Header(): JSX.Element {
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{user?.email}</span>
-                      <span className="header__favorite-count">{favorites.length}</span>
+                      <span className="header__favorite-count" data-testid="favoritesAmount">{favorites.length}</span>
                     </Link>
                   </li>
-                  <li className="header__nav-item" onClick={signOutClickHandler}>
+                  <li className="header__nav-item" onClick={signOutClickHandler} data-testid='signOutElement'>
                     <Link to='' className="header__nav-link">
                       <span className="header__signout">Sign out</span>
                     </Link>
