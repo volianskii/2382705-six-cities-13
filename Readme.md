@@ -1,3 +1,6 @@
+Run project: npm start
+Run tests: npm test
+
 Six Cities
 
 Six Cities is an application (service) for finding rental offers.
